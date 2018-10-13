@@ -2,24 +2,9 @@ import React from 'react';
 
 class Map extends React.Component {
 
-  state = {
-    locations: [
-      {title: 'Villa de Amore',
-      location: {lat: 33.538770, lng: -117.068690}},
-      {title: 'Secluded Garden Estate',
-      location: {lat: 33.413740, lng: -117.0868003}},
-      {title: 'Owl Creek Farms',
-      location: {lat: 33.572370, lng: -116.930650}},
-      {title: 'Monteleone Meadows',
-      location: {lat: 33.607650, lng: -117.133680}},
-      {title: 'Wedgewood Weddings',
-      location: {lat: 33.487410, lng: -117.033960}}
-    ]
-  }
-
   componentDidMount() {
     window.initMap = this.initMap;
-    this.loadAPI();
+    this.props.loadAPI();
   }
 
   initMap = () => {
@@ -27,6 +12,7 @@ class Map extends React.Component {
       center: {lat: 33.503333, lng: -117.123611},
         zoom: 11
     });
+
     let largeInfowindow = new window.google.maps.InfoWindow();
     function populateInfoWindow(marker, infowindow) {
       if (infowindow.marker !== marker) {
@@ -39,9 +25,10 @@ class Map extends React.Component {
         infowindow.open(map, marker);
       }
     }
-    for (let i = 0; i < this.state.locations.length; i++) {
-      let position = this.state.locations[i].location;
-      let title = this.state.locations[i].title;
+    
+    for (let i = 0; i < this.props.locations.length; i++) {
+      let position = this.props.locations[i].location;
+      let title = this.props.locations[i].title;
       let marker = new window.google.maps.Marker({
         position: position,
         title: title,
@@ -55,20 +42,9 @@ class Map extends React.Component {
     }
   }
 
-  loadAPI = () => {
-    let container = document.getElementById('container');
-    let script = document.createElement('script');
-    script.src= "https://maps.googleapis.com/maps/api/js?libraries=geometry,drawing&key=AIzaSyBAhV7AdJGxUzx4KdpKX8Q6GDrYmV3V4yw&v=3&callback=initMap";
-    script.async= true;
-    script.defer= true;
-    container.appendChild(script);
-  }
-
   render() {
     return (
-      <div id="container">
-        <div id="map"></div>
-      </div>
+      <div id="map"></div>
     )
   }
 };
