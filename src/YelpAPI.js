@@ -14,4 +14,4 @@ export const getReviews = (locationId) =>
 export const getBusinessInfo = (locationId) =>
   fetch(`${corsAnywhere}/${api}/${locationId}`, {headers})
     .then(res => res.json())
-    .then(data => data.reviews)
+    .then(data => data)
