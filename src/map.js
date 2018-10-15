@@ -2,9 +2,18 @@ import React from 'react';
 
 class Map extends React.Component {
 
+  state = {
+    map: null
+  }
+
   componentDidMount() {
+    this.props.loadYelpAPI();
     window.initMap = this.initMap;
-    this.props.loadAPI();
+    this.props.loadMapsAPI();
+  }
+
+  componentDidUpdate() {
+    this.loadMarkers(this.state.map);
   }
 
   initMap = () => {
@@ -12,33 +21,49 @@ class Map extends React.Component {
       center: {lat: 33.503333, lng: -117.123611},
         zoom: 11
     });
+    this.setState({map: map});
+    this.loadMarkers(map);
+  }
 
+  loadMarkers = (map) => {
     let largeInfowindow = new window.google.maps.InfoWindow();
     function populateInfoWindow(marker, infowindow) {
+      let container = document.getElementById('container');
+      let scriptYelp = document.createElement('script');
+      scriptYelp.src= "https://www.yelp.com/embed/widgets.js";
+      scriptYelp.async= true;
+      container.appendChild(scriptYelp);
+
       if (infowindow.marker !== marker) {
         infowindow.setContent('');
         infowindow.marker = marker;
         infowindow.addListener('closeclick', function() {
           infowindow.marker = null;
         });
-        infowindow.setContent('<div>' + marker.title + '</div>');
+        infowindow.setContent(`<div>${marker.title}</div>
+          <span class="yelp-review" data-review-id="${marker.reviews[0].id}" data-hostname="www.yelp.com">Read<a href="https://www.yelp.com/user_details?userid=${marker.reviews[0].user.id}" rel="nofollow noopener">${marker.reviews[0].user.name}</a>'s<a href="https://www.yelp.com/biz/villa-de-amore-temecula?hrid=xJa7_lO5GDCBYR25yHN1BQ" rel="nofollow noopener">review</a> of <a href="https://www.yelp.com/biz/y8DBzKXqy0nzgTPBw89bgg" rel="nofollow noopener">Villa de Amore</a> on <a href="https://www.yelp.com" rel="nofollow noopener">Yelp</a><script async="async" src="https://www.yelp.com/embed/widgets.js" type="text/javascript"></script></span>`);
+
+
         infowindow.open(map, marker);
       }
     }
-    
-    for (let i = 0; i < this.props.locations.length; i++) {
-      let position = this.props.locations[i].location;
-      let title = this.props.locations[i].title;
+    // Create markers for each venue
+    for (let i = 0; i < this.props.venues.length; i++) {
+      let position = this.props.venues[i].location;
+      let title = this.props.venues[i].title;
+      let reviews = this.props.venues[i].reviews;
+      let id = this.props.venues[i].id;
       let marker = new window.google.maps.Marker({
         position: position,
         title: title,
+        reviews: reviews,
         map: map,
         animation: window.google.maps.Animation.DROP,
-        id: i
+        id: id
       });
       marker.addListener('click', function() {
-            populateInfoWindow(this, largeInfowindow);
-          });
+        populateInfoWindow(this, largeInfowindow)
+      });
     }
   }
 

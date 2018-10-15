@@ -6,12 +6,16 @@ class List extends React.Component {
     this.populateList();
   }
 
+  componentDidUpdate() {
+    this.populateList();
+  }
+
   populateList = () => {
-    for (let i = 0; i < this.props.locations.length; i++) {
+    for (let i = 0; i < this.props.venues.length; i++) {
       let listbox = document.getElementById('listbox');
       let item = document.createElement('div');
-      item.innerText = `${i+1}. ${this.props.locations[i].title}
-      ${this.props.locations[i].reviews}`
+      item.innerText = `${i+1}. ${this.props.venues[i].title}
+      ${this.props.venues[i].reviews}`
       item.className =  'listitem';
       listbox.appendChild(item);
     }
