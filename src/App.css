@@ -56,20 +56,22 @@
   margin: 5%;
 }
 
-#infocontainer {
-  width: 350px;
+#infoContainer {
+  width: 360px;
   height: 350px;
+
 }
 
-#infobox {
-  width: 100%;
+#yelpBox {
+  width: 360px;
+  height: 300px;
+  overflow: scroll;
 }
 
-#yelpimage {
+#yelpImage {
   max-width: 80%;
 }
 
-#yelpreview {
-  max-width: 100%;
-
+#yelpReview {
+  width: 100%;
 }

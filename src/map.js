@@ -1,4 +1,5 @@
 import React from 'react';
+// import InfoWindow from './infowindow';
 
 class Map extends React.Component {
 
@@ -42,7 +43,7 @@ class Map extends React.Component {
           infowindow.marker = null;
         });
         infowindow.setContent(`<div id="infocontainer"><div id="infobox"><img id="yelpimage" src=${marker.info.photos[0]} alt="venue photo from yelp website">
-          <div id="reviewbox"><span class="yelp-review" data-review-id="${marker.reviews[0].id}" data-hostname="www.yelp.com">Read<a href="https://www.yelp.com/user_details?userid=${marker.reviews[0].user.id}" rel="nofollow noopener">${marker.reviews[0].user.name}</a>'s<a href="https://www.yelp.com/biz/villa-de-amore-temecula?hrid=xJa7_lO5GDCBYR25yHN1BQ" rel="nofollow noopener">review</a> of <a href="https://www.yelp.com/biz/y8DBzKXqy0nzgTPBw89bgg" rel="nofollow noopener">Villa de Amore</a> on <a href="https://www.yelp.com" rel="nofollow noopener">Yelp</a><script async="async" src="https://www.yelp.com/embed/widgets.js" type="text/javascript"></script></span></div></div></div>`);
+          <div id="reviewbox"><span class="yelp-review" data-review-id="${marker.reviews[0].id}" data-hostname="www.yelp.com">Read<a href="https://www.yelp.com/user_details?userid=${marker.reviews[0].user.id}" rel="nofollow noopener">${marker.reviews[0].user.name}</a>'s<a href="https://www.yelp.com/biz/villa-de-amore-temecula?hrid=xJa7_lO5GDCBYR25yHN1BQ" rel="nofollow noopener">review</a> of <a href="https://www.yelp.com/biz/y8DBzKXqy0nzgTPBw89bgg" rel="nofollow noopener">Villa de Amore</a> on <a href="https://www.yelp.com" rel="nofollow noopener">Yelp</a></span></div></div></div>`);
 
 
         infowindow.open(map, marker);
@@ -72,14 +73,16 @@ class Map extends React.Component {
         populateInfoWindow(this, largeInfowindow)
       });
       markers.push(marker);
-
+console.log(markers);
     }
   }
 
   render() {
 
     return (
-      <div id="map"></div>
+      <div id="map">
+
+      </div>
     )
   }
 };
