@@ -49,6 +49,7 @@ class App extends Component {
     markers: []
   }
 
+
   loadMapsAPI = () => {
     let container = document.getElementById('container');
     let script = document.createElement('script');
@@ -92,10 +93,9 @@ class App extends Component {
     return (
       <div className="App">
         <div id="container">
-          <List venues={this.state.venues} filterRatings={this.filterRatings}/>
+          <List venues={this.state.venues} filteredResults={this.state.filteredResults} filterRatings={this.filterRatings}/>
           <Map venues={this.state.venues} filteredResults={this.state.filteredResults} markers={this.state.markers} loadMapsAPI={this.loadMapsAPI} loadYelpAPI={this.loadYelpAPI} />
         </div>
-        <InfoWindowContent venues={this.state.venues} />
       </div>
     );
   }

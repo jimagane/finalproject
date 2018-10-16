@@ -1,47 +1,12 @@
 import React from 'react';
+import InfoWindowContent from './infowindowcontent';
 
 class List extends React.Component {
 
-  state = {
-    itemlist: []
-  }
-
-  componentDidMount() {
-
-  }
-
-  componentDidUpdate() {
-  }
-
-  populateListItems = () => {
-
-    const ul = document.getElementById("venues-list");
-    ul.empty()
-      this.props.venues.forEach(venue => {
-        ul.append(this.createVenueHTML(venue));
-      });
+// TODO: render infowindow for each of filteredResults
 
 
-  }
-
-  createVenueHTML = (venue) => {
-  const li = document.createElement('li');
-
-    const more = document.createElement('a');
-    more.innerHTML = venue.title;
-    li.append(more);
-
-    const location = document.createElement('p');
-    location.innerHTML = venue.location;
-    li.append(location);
-
-    const reviews = document.createElement('p');
-    reviews.innerHTML = venue.reviews;
-    li.append(reviews);
-console.log(li)
-  return li
-}
-
+  // TODO: if listitem clicked, bounce and highlight marker
   render() {
 
     return(
@@ -70,9 +35,9 @@ console.log(li)
             </select>
             <select id="rating-select" name="ratings" value={this.props.ratings} onChange={event=>this.props.filterRatings(event.target.value)}>
               <option value="0">All Ratings</option>
-              <option value="3">**</option>
-              <option value="4">***</option>
-              <option value="5">****</option>
+              <option value="3">** and up</option>
+              <option value="4">*** and up</option>
+              <option value="5">**** and up</option>
             </select>
           </nav>
         </header>
@@ -81,6 +46,9 @@ console.log(li)
           <section id="list-container">
             <h3>Results:</h3>
             <ul id="venues-list">
+              {this.props.filteredResults.map((result) => (
+                <InfoWindowContent result={result} filteredResults={this.props.filteredResults}/>
+              ))}
             </ul>
           </section>
         </main>
