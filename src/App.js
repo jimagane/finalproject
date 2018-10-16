@@ -42,7 +42,9 @@ class App extends Component {
         reviews: '...loading reviews',
         info: ''
       },
-    ]
+    ],
+    filteredResults: [],
+    markers: []
   }
 
   loadMapsAPI = () => {
@@ -77,12 +79,19 @@ class App extends Component {
     }
   }
 
+
+
+  filterRatings = (rating) => {
+    let filteredRatings = this.state.venues.filter((venue)=> venue.info.rating >= rating);
+    this.setState({filteredResults: filteredRatings});
+  }
+
   render() {
     return (
       <div className="App">
         <div id="container">
-          <List venues={this.state.venues} />
-          <Map venues={this.state.venues} loadMapsAPI={this.loadMapsAPI} loadYelpAPI={this.loadYelpAPI} />
+          <List venues={this.state.venues} filterRatings={this.filterRatings}/>
+          <Map venues={this.state.venues} filteredResults={this.state.filteredResults} markers={this.state.markers} loadMapsAPI={this.loadMapsAPI} loadYelpAPI={this.loadYelpAPI} />
         </div>
       </div>
     );

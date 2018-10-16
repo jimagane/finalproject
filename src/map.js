@@ -22,10 +22,11 @@ class Map extends React.Component {
         zoom: 11
     });
     this.setState({map: map});
-    this.loadMarkers(map);
   }
 
+
   loadMarkers = (map) => {
+
     let largeInfowindow = new window.google.maps.InfoWindow();
     function populateInfoWindow(marker, infowindow) {
       let container = document.getElementById('container');
@@ -40,20 +41,24 @@ class Map extends React.Component {
         infowindow.addListener('closeclick', function() {
           infowindow.marker = null;
         });
-        infowindow.setContent(`<div><img src=${marker.info.photos[0]} alt="venue photo from yelp website"></div>
-          <span class="yelp-review" data-review-id="${marker.reviews[0].id}" data-hostname="www.yelp.com">Read<a href="https://www.yelp.com/user_details?userid=${marker.reviews[0].user.id}" rel="nofollow noopener">${marker.reviews[0].user.name}</a>'s<a href="https://www.yelp.com/biz/villa-de-amore-temecula?hrid=xJa7_lO5GDCBYR25yHN1BQ" rel="nofollow noopener">review</a> of <a href="https://www.yelp.com/biz/y8DBzKXqy0nzgTPBw89bgg" rel="nofollow noopener">Villa de Amore</a> on <a href="https://www.yelp.com" rel="nofollow noopener">Yelp</a><script async="async" src="https://www.yelp.com/embed/widgets.js" type="text/javascript"></script></span>`);
+        infowindow.setContent(`<div id="infocontainer"><div id="infobox"><img id="yelpimage" src=${marker.info.photos[0]} alt="venue photo from yelp website">
+          <div id="reviewbox"><span class="yelp-review" data-review-id="${marker.reviews[0].id}" data-hostname="www.yelp.com">Read<a href="https://www.yelp.com/user_details?userid=${marker.reviews[0].user.id}" rel="nofollow noopener">${marker.reviews[0].user.name}</a>'s<a href="https://www.yelp.com/biz/villa-de-amore-temecula?hrid=xJa7_lO5GDCBYR25yHN1BQ" rel="nofollow noopener">review</a> of <a href="https://www.yelp.com/biz/y8DBzKXqy0nzgTPBw89bgg" rel="nofollow noopener">Villa de Amore</a> on <a href="https://www.yelp.com" rel="nofollow noopener">Yelp</a><script async="async" src="https://www.yelp.com/embed/widgets.js" type="text/javascript"></script></span></div></div></div>`);
 
 
         infowindow.open(map, marker);
       }
     }
     // Create markers for each venue
-    for (let i = 0; i < this.props.venues.length; i++) {
-      let position = this.props.venues[i].location;
-      let title = this.props.venues[i].title;
-      let info = this.props.venues[i].info;
-      let reviews = this.props.venues[i].reviews;
-      let id = this.props.venues[i].id;
+
+
+    let markers = [];
+
+    for (let i = 0; i < this.props.filteredResults.length; i++) {
+      let position = this.props.filteredResults[i].location;
+      let title = this.props.filteredResults[i].title;
+      let info = this.props.filteredResults[i].info;
+      let reviews = this.props.filteredResults[i].reviews;
+      let id = this.props.filteredResults[i].id;
       let marker = new window.google.maps.Marker({
         position: position,
         title: title,
@@ -66,10 +71,13 @@ class Map extends React.Component {
       marker.addListener('click', function() {
         populateInfoWindow(this, largeInfowindow)
       });
+      markers.push(marker);
+
     }
   }
 
   render() {
+
     return (
       <div id="map"></div>
     )

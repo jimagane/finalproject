@@ -55,3 +55,21 @@
   text-align: left;
   margin: 5%;
 }
+
+#infocontainer {
+  width: 350px;
+  height: 350px;
+}
+
+#infobox {
+  width: 100%;
+}
+
+#yelpimage {
+  max-width: 80%;
+}
+
+#yelpreview {
+  max-width: 100%;
+
+}
