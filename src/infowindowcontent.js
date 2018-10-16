@@ -1,6 +1,6 @@
 import React from 'react';
 
-class InfoWindow extends React.Component {
+class InfoWindowContent extends React.Component {
 
   componentDidMount() {
     this.loadYelpEmbedScript();
@@ -42,4 +42,4 @@ class InfoWindow extends React.Component {
   }
 };
 
-export default InfoWindow;
+export default InfoWindowContent;

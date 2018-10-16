@@ -1,5 +1,6 @@
 import React from 'react';
-// import InfoWindow from './infowindow';
+import InfoWindowContent from './infowindowcontent';
+import { renderToString } from 'react-dom/server'
 
 class Map extends React.Component {
 
@@ -30,20 +31,16 @@ class Map extends React.Component {
 
     let largeInfowindow = new window.google.maps.InfoWindow();
     function populateInfoWindow(marker, infowindow) {
-      let container = document.getElementById('container');
-      let scriptYelp = document.createElement('script');
-      scriptYelp.src= "https://www.yelp.com/embed/widgets.js";
-      scriptYelp.async= true;
-      container.appendChild(scriptYelp);
-
+let a = renderToString(<InfoWindowContent />);
+console.log(a);
       if (infowindow.marker !== marker) {
         infowindow.setContent('');
         infowindow.marker = marker;
         infowindow.addListener('closeclick', function() {
           infowindow.marker = null;
         });
-        infowindow.setContent(`<div id="infocontainer"><div id="infobox"><img id="yelpimage" src=${marker.info.photos[0]} alt="venue photo from yelp website">
-          <div id="reviewbox"><span class="yelp-review" data-review-id="${marker.reviews[0].id}" data-hostname="www.yelp.com">Read<a href="https://www.yelp.com/user_details?userid=${marker.reviews[0].user.id}" rel="nofollow noopener">${marker.reviews[0].user.name}</a>'s<a href="https://www.yelp.com/biz/villa-de-amore-temecula?hrid=xJa7_lO5GDCBYR25yHN1BQ" rel="nofollow noopener">review</a> of <a href="https://www.yelp.com/biz/y8DBzKXqy0nzgTPBw89bgg" rel="nofollow noopener">Villa de Amore</a> on <a href="https://www.yelp.com" rel="nofollow noopener">Yelp</a></span></div></div></div>`);
+
+        infowindow.setContent(a);
 
 
         infowindow.open(map, marker);
@@ -51,7 +48,13 @@ class Map extends React.Component {
     }
     // Create markers for each venue
 
-
+    function loadYelpEmbedScript()  {
+      let container = document.getElementById('yelpReview');
+      let scriptYelp = document.createElement('script');
+      scriptYelp.src= "https://www.yelp.com/embed/widgets.js";
+      scriptYelp.async= true;
+      container.appendChild(scriptYelp);
+    }
     let markers = [];
 
     for (let i = 0; i < this.props.filteredResults.length; i++) {
@@ -70,6 +73,7 @@ class Map extends React.Component {
         id: id
       });
       marker.addListener('click', function() {
+        loadYelpEmbedScript();
         populateInfoWindow(this, largeInfowindow)
       });
       markers.push(marker);

@@ -3,7 +3,7 @@ import './App.css';
 import Map from './map';
 import List from './list';
 import * as YelpAPI from './YelpAPI';
-import InfoWindow from './infowindow';
+import InfoWindowContent from './infowindowcontent';
 
 
 class App extends Component {
@@ -95,7 +95,7 @@ class App extends Component {
           <List venues={this.state.venues} filterRatings={this.filterRatings}/>
           <Map venues={this.state.venues} filteredResults={this.state.filteredResults} markers={this.state.markers} loadMapsAPI={this.loadMapsAPI} loadYelpAPI={this.loadYelpAPI} />
         </div>
-        <InfoWindow venues={this.state.venues} />
+        <InfoWindowContent venues={this.state.venues} />
       </div>
     );
   }
