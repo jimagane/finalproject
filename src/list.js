@@ -3,12 +3,12 @@ import InfoWindowContent from './infowindowcontent';
 
 class List extends React.Component {
 
+
 // TODO: render infowindow for each of filteredResults
 
 
   // TODO: if listitem clicked, bounce and highlight marker
   render() {
-
     return(
       <div className="options-box">
         <header>
@@ -17,27 +17,21 @@ class List extends React.Component {
           <nav className="filter-options">
             <select id="location-select" name="locations" >
               <option value="all">All Locations</option>
-              <option value="church">Church</option>
+              <option value="chapel">Chapel</option>
               <option value="winery">Winery</option>
-              <option value="private">Private</option>
+              <option value="private">Private Estate</option>
             </select>
-            <select id="price-select" name="prices" >
-              <option value="all">All Price Ranges</option>
-              <option value="$">$</option>
-              <option value="$$">$$</option>
-              <option value="$$$">$$$</option>
+            <select id="price-select" name="prices" value={this.props.priceSelect} onChange={event=>this.props.selectPrice(event.target.value)} >
+              <option value="50000">All Price Ranges</option>
+              <option value="5000">$</option>
+              <option value="12000">$$ and below</option>
+              <option value="30000">$$$ and below</option>
             </select>
-            <select id="size-select" name="sizes" >
-              <option value="all">All Sizes</option>
-              <option value="small">under 50</option>
-              <option value="medium">50-100</option>
-              <option value="large">over 100</option>
-            </select>
-            <select id="rating-select" name="ratings" value={this.props.ratings} onChange={event=>this.props.filterRatings(event.target.value)}>
+            <select id="rating-select" name="ratings" value={this.props.ratingSelect} onChange={event=>this.props.selectRating(event.target.value)}>
               <option value="0">All Ratings</option>
-              <option value="3">** and up</option>
-              <option value="4">*** and up</option>
-              <option value="5">**** and up</option>
+              <option value="3">***</option>
+              <option value="4">****</option>
+              <option value="5">*****</option>
             </select>
           </nav>
         </header>

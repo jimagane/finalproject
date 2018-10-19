@@ -24,15 +24,18 @@ class Map extends React.Component {
         zoom: 11
     });
     this.setState({map: map});
+    this.props.populateInitMap();
   }
 
+// TODO: rendre markers for each of filterd results
 
+
+  // TODO: if marker clicked, open InfoWindow
   loadMarkers = (map) => {
-
     let largeInfowindow = new window.google.maps.InfoWindow();
     function populateInfoWindow(marker, infowindow) {
-let a = renderToString(<InfoWindowContent />);
-console.log(a);
+      let a = renderToString(<InfoWindowContent result={marker}/>);
+
       if (infowindow.marker !== marker) {
         infowindow.setContent('');
         infowindow.marker = marker;
@@ -85,7 +88,6 @@ console.log(markers);
 
     return (
       <div id="map">
-
       </div>
     )
   }

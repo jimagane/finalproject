@@ -33,7 +33,7 @@
 
 #map {
   height: 100%;
-  left: 362px;
+  left: 372px;
   right: 0px;
   bottom:0px;
   position: absolute;
@@ -47,7 +47,7 @@
   line-height: 35px;
   padding: 10px 10px 30px 10px;
   text-align: center;
-  width: 340px;
+  width: 350px;
 }
 
 .listitem {
@@ -58,8 +58,12 @@
 
 #infoContainer {
   width: 360px;
-  height: 350px;
+  height: 500px;
 
+}
+
+#venueDetails {
+  height: 200px;
 }
 
 #yelpBox {
@@ -74,4 +78,9 @@
 
 #yelpReview {
   width: 100%;
+}
+
+#venues-list {
+  padding: 0;
+  height: auto;
 }
