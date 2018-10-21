@@ -3,11 +3,8 @@ import InfoWindowContent from './infowindowcontent';
 
 class List extends React.Component {
 
-
-// TODO: render infowindow for each of filteredResults
-
-
   // TODO: if listitem clicked, bounce and highlight marker
+
   render() {
     return(
       <div className="options-box">
@@ -21,7 +18,7 @@ class List extends React.Component {
               <option value="winery">Winery</option>
               <option value="private">Private Estate</option>
             </select>
-            <select id="price-select" name="prices" value={this.props.priceSelect} onChange={event=>this.props.selectPrice(event.target.value)} >
+            <select id="price-select" name="prices" value={this.props.priceSelect} onChange={event=>this.props.selectPrice(event.target.value)}>
               <option value="50000">All Price Ranges</option>
               <option value="5000">$</option>
               <option value="12000">$$ and below</option>
@@ -41,7 +38,7 @@ class List extends React.Component {
             <h3>Results:</h3>
             <ul id="venues-list">
               {this.props.filteredResults.map((result) => (
-                <InfoWindowContent result={result} filteredResults={this.props.filteredResults}/>
+                <InfoWindowContent key={result.id} result={result} />
               ))}
             </ul>
           </section>

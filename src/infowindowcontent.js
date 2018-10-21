@@ -14,7 +14,7 @@ class InfoWindowContent extends React.Component {
     container.appendChild(scriptYelp);
   }
 
-// TODO: for each of state.filteredresults fill venue title, location, price, size img src and review id's
+// TODO: for each of state.filteredresults fill venue title, location, price, size img src and review id's/if available
 // TODO: bug! clear yelp reviews each time it rerenders
 
   render() {
@@ -23,12 +23,14 @@ class InfoWindowContent extends React.Component {
       // for (let a=0; a<this.props.filteredResults.length; i++) {
       //  return content below
       // }
-      //if this.props.filteredResults[i].reviews == null return ...loading reviews
-      //  else for (let b=0; i<this.props.filteredResults[b].reviews.length; i++)
-      // return this.props.filteredResults[a].reviews[b].id
 
       // <p>{this.props.result.info.location.display_address}</p>
       // <p>{this.props.result.info.display_phone}/5</p>
+
+
+      //if this.props.filteredResults[i].reviews == null return ...loading reviews
+      //  else for (let b=0; i<this.props.filteredResults[b].reviews.length; i++)
+      // return this.props.filteredResults[a].reviews[b].id
     return (
       <div id="infoContainer">
         <div id="venueDetails">
