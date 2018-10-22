@@ -3,8 +3,6 @@ import InfoWindowContent from './infowindowcontent';
 
 class List extends React.Component {
 
-  // TODO: if listitem clicked, bounce and highlight marker
-
   render() {
     return(
       <div className="options-box">
@@ -12,12 +10,6 @@ class List extends React.Component {
           <h1>WeddVenView</h1>
           <h2 id="filter-results">Find Your Wedding Venue:</h2>
           <nav className="filter-options">
-            <select id="location-select" name="locations" >
-              <option value="all">All Locations</option>
-              <option value="chapel">Chapel</option>
-              <option value="winery">Winery</option>
-              <option value="private">Private Estate</option>
-            </select>
             <select id="price-select" name="prices" value={this.props.priceSelect} onChange={event=>this.props.selectPrice(event.target.value)}>
               <option value="50000">All Price Ranges</option>
               <option value="5000">$</option>

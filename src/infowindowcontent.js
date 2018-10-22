@@ -36,7 +36,7 @@ class InfoWindowContent extends React.Component {
         <div id="venueDetails">
           <a href={this.props.result.url}><h3>{this.props.result.title}</h3></a>
 
-            <p>Rating: {this.props.result.info.rating}/5</p>
+            <p>Rating: {this.props.result.rating}/5</p>
         </div>
         <div id="yelpBox">
           <img id="yelpImage" src={this.props.result.info.image_url} alt="venue, provided by Yelp website"></img>

@@ -14,9 +14,8 @@ class App extends Component {
         title: 'Villa de Amore',
         location: {lat: 33.538770, lng: -117.068690},
         reviews: '...loading reviews',
-        info: {
-        rating: '1'},
-        locationType: 'private',
+        info: '',
+        rating: '4.5',
         price: '16000',
         url: 'http://villadeamore.com'
       },
@@ -25,9 +24,8 @@ class App extends Component {
         title: 'Secluded Garden Estate',
         location: {lat: 33.413740, lng: -117.0868003},
         reviews: '...loading reviews',
-        info: {
-        rating:'1'},
-        locationType: 'private',
+        info: '',
+        rating: '4.5',
         price: '3400',
         url: 'http://secludedgardenestate.com'
       },
@@ -36,9 +34,8 @@ class App extends Component {
         title: 'Owl Creek Farms',
         location: {lat: 33.572370, lng: -116.930650},
         reviews: '...loading reviews',
-        info: {
-        rating:'2'},
-        locationType: 'private',
+        info: '',
+        rating: '3.5',
         price: '10000',
         url: 'https://owlcreekfarms.com/'
       },
@@ -47,8 +44,8 @@ class App extends Component {
         title: 'Monteleone Meadows',
         location: {lat: 33.607650, lng: -117.133680},
         reviews: '...loading reviews',
-        info: {rating:'2'},
-        locationType: 'private',
+        info: '',
+        rating: '5',
         price: '9000',
         url: 'https://monteleonemeadows.com/'
       },
@@ -57,8 +54,8 @@ class App extends Component {
         title: 'Wedgewood Weddings-Galway Downs',
         location: {lat: 33.487410, lng: -117.033960},
         reviews: '...loading reviews',
-        info: {rating:'3'},
-        locationType: 'private',
+        info: '',
+        rating: '5',
         price: '11000',
         url: 'https://www.wedgewoodweddings.com/venues/southern-california/galway-downs'
       },
@@ -67,8 +64,8 @@ class App extends Component {
         title: 'Mount Palomar Winery',
         location: {lat: 33.52638, lng: -117.07422},
         reviews: '...loading reviews',
-        info: {rating:'3'},
-        locationType: 'winery',
+        info: '',
+        rating: '4',
         price: '8300',
         url: 'https://www.mountpalomarwinery.com/'
       },
@@ -77,8 +74,8 @@ class App extends Component {
         title: 'Lorimar Winery',
         location: {lat: 33.5397679069828, lng: -117.058968856233},
         reviews: '...loading reviews',
-        info: {rating:'4'},
-        locationType: 'winery',
+        info: '',
+        rating: '4',
         price: '11000',
         url: 'https://www.lorimarwinery.com/'
       },
@@ -87,8 +84,8 @@ class App extends Component {
         title: 'Chapel of Memories',
         location: {lat: 33.4968797, lng: -117.1520152},
         reviews: '...loading reviews',
-        info: {rating: '4'},
-        locationType: 'church',
+        info: '',
+        rating: '4',
         price: '2400',
         url: 'http://chapelofmemories.org/'
       },
@@ -97,8 +94,8 @@ class App extends Component {
         title: 'Abbott Manor',
         location: {lat: 33.50258, lng: -117.13252},
         reviews: '...loading reviews',
-        info: {rating:'5'},
-        locationType: 'private',
+        info: '',
+        rating: '5',
         price: '9000',
         url: 'https://www.abbottmanor.com/'
       },
@@ -107,8 +104,8 @@ class App extends Component {
         title: 'Chapel In The Vines',
         location: {lat: 33.494054, lng: -117.148554},
         reviews: '...loading reviews',
-        info: {rating:'5'},
-        locationType: 'church',
+        info: '',
+        rating: '4.5',
         price: '400',
         url: 'http://www.chapelinthevines.com/'
       }
@@ -122,7 +119,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // this.loadYelpAPI();
+    this.loadYelpAPI();
     window.initMap = this.initMap;
     this.loadMapsAPI();
   }
@@ -145,6 +142,7 @@ class App extends Component {
         stateCopy.venues = stateCopy.venues.slice();
         stateCopy.venues[i] = Object.assign({}, stateCopy.venues[i]);
         stateCopy.venues[i].info = data;
+        stateCopy.venues[i].rating = data.rating;
         this.setState(stateCopy);
       });
     }
@@ -165,13 +163,13 @@ class App extends Component {
         zoom: 11
     });
     this.setState({map: map, filteredResults: this.state.venues});
-this.loadMarkers(this.state.map);
+    this.loadMarkers(this.state.map);
   }
-
 
   loadMarkers = (map) => {
     let markers =[];
     markers = this.state.markers;
+
     for (let i = 0; i < this.state.filteredResults.length; i++) {
       let position = this.state.filteredResults[i].location;
       let title = this.state.filteredResults[i].title;
@@ -197,16 +195,12 @@ this.loadMarkers(this.state.map);
     let filteredResults = this.state.venues.filter((venue)=> venue.info.rating >= value);
     filteredResults = filteredResults.filter((venue)=> venue.price<= Number(this.state.priceSelect));
     this.setState({ratingSelect: value, filteredResults: filteredResults});
-
-
   }
 
   selectPrice = (value) => {
     let filteredResults = this.state.venues.filter((venue)=> venue.info.rating >= this.state.ratingSelect);
     filteredResults = filteredResults.filter((venue)=> venue.price<= Number(value));
     this.setState({priceSelect: value, filteredResults: filteredResults});
-
-
   }
 
   render() {
