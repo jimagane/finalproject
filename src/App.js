@@ -167,15 +167,15 @@ class App extends Component {
   }
 
   loadMarkers = (map) => {
-    let markers =[];
-    markers = this.state.markers;
-
-    for (let i = 0; i < this.state.filteredResults.length; i++) {
-      let position = this.state.filteredResults[i].location;
-      let title = this.state.filteredResults[i].title;
-      let info = this.state.filteredResults[i].info;
-      let reviews = this.state.filteredResults[i].reviews;
-      let id = this.state.filteredResults[i].id;
+    let markers = [];
+    markers=this.state.markers;
+    let venues = this.state.filteredResults;
+    venues.map(venue => {
+      let position = venue.location;
+      let title = venue.title;
+      let info = venue.info;
+      let reviews = venue.reviews;
+      let id = venue.id;
       let marker = new window.google.maps.Marker({
         position: position,
         title: title,
@@ -186,10 +186,42 @@ class App extends Component {
         id: id
       });
       markers.push(marker);
-    }
+    })
+this.populateInfoWindow(this.state.map);
+
+
   }
 
+  populateInfoWindow = (map) => {
+    this.state.markers.map(marker=>{
+      marker.addListener('click', function() {
+        loadYelpEmbedScript();
+        populateInfoWindow(marker, largeInfowindow);
+      });
+      let largeInfowindow = new window.google.maps.InfoWindow();
+      function loadYelpEmbedScript()  {
+        let container = document.getElementById('yelpReview');
+        let scriptYelp = document.createElement('script');
+        scriptYelp.src= "https://www.yelp.com/embed/widgets.js";
+        scriptYelp.async= true;
+        container.appendChild(scriptYelp);
+      }
 
+      function populateInfoWindow(marker, infowindow) {
+        let infocontent = renderToString(<InfoWindowContent result={marker}/>);
+        if (infowindow.marker !== marker) {
+          infowindow.setContent('');
+          infowindow.marker = marker;
+          infowindow.addListener('closeclick', function() {
+            infowindow.marker = null;
+          });
+          infowindow.setContent(infocontent);
+          infowindow.open(map, marker);
+        }
+      }
+
+    })
+  }
 
   selectRating = (value) => {
     let filteredResults = this.state.venues.filter((venue)=> venue.info.rating >= value);
@@ -209,6 +241,7 @@ class App extends Component {
         <div id="container">
           <List filteredResults={this.state.filteredResults} selectRating={this.selectRating} selectPrice={this.selectPrice} ratingSelect={this.state.ratingSelect} priceSelect={this.state.priceSelect} />
           <Map filteredResults={this.state.filteredResults} markers={this.state.markers} loadMarkers={this.loadMarkers} loadMapsAPI={this.loadMapsAPI} loadYelpAPI={this.loadYelpAPI} map={this.state.map}/>
+
         </div>
       </div>
     );

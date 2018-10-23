@@ -1,5 +1,4 @@
 import React from 'react';
-import Marker from './marker';
 
 class Map extends React.Component {
 
@@ -9,14 +8,9 @@ class Map extends React.Component {
     }
   }
 
-
-
   render() {
     return (
       <div id="map">
-        {this.props.filteredResults.map((result) => (
-          <Marker key={result.id} result={result} map={this.props.map}/>
-        ))}
         {this.clearMarkers(this.props.markers)}
         {this.props.loadMarkers(this.props.map)}
       </div>
