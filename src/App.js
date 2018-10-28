@@ -3,123 +3,143 @@ import './App.css';
 import Map from './map';
 import List from './list';
 import * as YelpAPI from './YelpAPI';
-import InfoWindowContent from './infowindowcontent';
-import { renderToString } from 'react-dom/server';
 
 class App extends Component {
   state = {
     venues: [
       {
-        id: 'y8DBzKXqy0nzgTPBw89bgg',
         title: 'Villa de Amore',
         location: {lat: 33.538770, lng: -117.068690},
+        address: '40205 Calle Cabernet, Temecula, CA 92591',
+        phone: '(951) 970-5831',
+        url: 'http://villadeamore.com',
+        rating: '4.7',
+        price: '16000',
         reviews: '...loading reviews',
         info: '',
-        rating: '4.5',
-        price: '16000',
-        url: 'http://villadeamore.com'
+        id: 'y8DBzKXqy0nzgTPBw89bgg'
       },
       {
-        id: 'ypUdrtD3fGe0kU5IaQnSeA',
         title: 'Secluded Garden Estate',
         location: {lat: 33.413740, lng: -117.0868003},
-        reviews: '...loading reviews',
-        info: '',
+        address: '38648 Pala-Temecula Rd, Pala, CA 92059',
+        phone: '(760) 742-3100',
+        url: 'http://secludedgardenestate.com',
         rating: '4.5',
         price: '3400',
-        url: 'http://secludedgardenestate.com'
+        reviews: '...loading reviews',
+        info: '',
+        id: 'ypUdrtD3fGe0kU5IaQnSeA'
       },
       {
-        id: 'iEHozPii1VYaHL7QHOK3Og',
         title: 'Owl Creek Farms',
         location: {lat: 33.572370, lng: -116.930650},
+        address: '37901 Sage Rd, Hemet, CA 92544',
+        phone: '(410) 533-9081',
+        url: 'https://owlcreekfarms.com/',
+        rating: '4.1',
+        price: '10000',
         reviews: '...loading reviews',
         info: '',
-        rating: '3.5',
-        price: '10000',
-        url: 'https://owlcreekfarms.com/'
+        id: 'iEHozPii1VYaHL7QHOK3Og'
       },
       {
-        id: 'S5YSydq99nnll---vzi-vA',
         title: 'Monteleone Meadows',
         location: {lat: 33.607650, lng: -117.133680},
+        address: '35245 Briggs Rd, Murrieta, CA 92563',
+        phone: '(951) 677-6403',
+        url: 'https://monteleonemeadows.com/',
+        rating: '4.8',
+        price: '9000',
         reviews: '...loading reviews',
         info: '',
-        rating: '5',
-        price: '9000',
-        url: 'https://monteleonemeadows.com/'
+        id: 'S5YSydq99nnll---vzi-vA'
       },
       {
-        id: '6Xmhd44RbaDiDoegmjuH6Q',
         title: 'Wedgewood Weddings-Galway Downs',
         location: {lat: 33.487410, lng: -117.033960},
+        address: '38801 Los Corralitos Rd, Temecula, CA 92592',
+        phone: '(866) 966-3009',
+        url: 'https://www.wedgewoodweddings.com/venues/southern-california/galway-downs',
+        rating: '3.2',
+        price: '11000',
         reviews: '...loading reviews',
         info: '',
-        rating: '5',
-        price: '11000',
-        url: 'https://www.wedgewoodweddings.com/venues/southern-california/galway-downs'
+        id: '6Xmhd44RbaDiDoegmjuH6Q'
       },
       {
-        id: 'QhSHKkDGSkawp_QxSloq_g',
         title: 'Mount Palomar Winery',
         location: {lat: 33.52638, lng: -117.07422},
+        address: '33820 Rancho California Rd, Temecula, CA 92591',
+        phone: '(951) 676-5047',
+        url: 'https://www.mountpalomarwinery.com/',
+        rating: '4.5',
+        price: '8300',
         reviews: '...loading reviews',
         info: '',
-        rating: '4',
-        price: '8300',
-        url: 'https://www.mountpalomarwinery.com/'
+        id: 'QhSHKkDGSkawp_QxSloq_g'
       },
       {
-        id: 'cfLGt932AJRHTBGf8_uZsw',
         title: 'Lorimar Winery',
         location: {lat: 33.5397679069828, lng: -117.058968856233},
+        address: '39990 Anza Rd, Temecula, CA 92591',
+        phone: '(951) 694-6699',
+        url: 'https://www.lorimarwinery.com/',
+        rating: '4.5',
+        price: '11000',
         reviews: '...loading reviews',
         info: '',
-        rating: '4',
-        price: '11000',
-        url: 'https://www.lorimarwinery.com/'
+        id: 'cfLGt932AJRHTBGf8_uZsw'
       },
       {
-        id: '9Bs0a3sL8vaLWnllC2_nuA',
         title: 'Chapel of Memories',
         location: {lat: 33.4968797, lng: -117.1520152},
+        address: '28300 Mercedes St, Temecula, CA 92590',
+        phone: '(951) 265-7720',
+        url: 'http://chapelofmemories.org/',
+        rating: '4.8',
+        price: '2400',
         reviews: '...loading reviews',
         info: '',
-        rating: '4',
-        price: '2400',
-        url: 'http://chapelofmemories.org/'
+        id: '9Bs0a3sL8vaLWnllC2_nuA'
       },
       {
-        id: '3UKrnJW2iq6f0drfo73UnQ',
         title: 'Abbott Manor',
         location: {lat: 33.50258, lng: -117.13252},
+        address: '40350 Camino Del Vino, Temecula, CA 92592',
+        phone: '(951) 834-8406',
+        url: 'https://www.abbottmanor.com/',
+        rating: '4.5',
+        price: '9000',
         reviews: '...loading reviews',
         info: '',
-        rating: '5',
-        price: '9000',
-        url: 'https://www.abbottmanor.com/'
+        id: '3UKrnJW2iq6f0drfo73UnQ'
       },
       {
-        id: 'De_mw0NexoKsBmWd-XcaXw',
         title: 'Chapel In The Vines',
         location: {lat: 33.494054, lng: -117.148554},
+        address: '41955 Main St, Temecula, CA 92590',
+        phone: '(951) 258-5599',
+        url: 'http://www.chapelinthevines.com/',
+        rating: '3.0',
+        price: '400',
         reviews: '...loading reviews',
         info: '',
-        rating: '4.5',
-        price: '400',
-        url: 'http://www.chapelinthevines.com/'
+        id: 'De_mw0NexoKsBmWd-XcaXw'
       }
     ],
     map: null,
-    markers: [],
+    reviewsDB: {},
     filteredResults: [],
+    markers: [],
+    largeInfoWindow: {},
+    bounds: {},
     ratingSelect: '0',
-    priceSelect: '50000',
-    locationSelect: ''
+    priceSelect: '50000'
   }
 
   componentDidMount() {
-    this.loadYelpAPI();
+    // this.loadYelpAPI();
     window.initMap = this.initMap;
     this.loadMapsAPI();
   }
@@ -133,16 +153,6 @@ class App extends Component {
         stateCopy.venues = stateCopy.venues.slice();
         stateCopy.venues[i] = Object.assign({}, stateCopy.venues[i]);
         stateCopy.venues[i].reviews = data;
-        this.setState(stateCopy);
-      });
-      YelpAPI.getBusinessInfo(this.state.venues[i].id)
-      .then(data => {
-        // Code solution for updating single property of object in array via copying object and slicing, credit to Radosław Miernik, url: 'https://stackoverflow.com/questions/35174489/reactjs-setstate-of-object-key-in-array/35174579'
-        let stateCopy = Object.assign({}, this.state);
-        stateCopy.venues = stateCopy.venues.slice();
-        stateCopy.venues[i] = Object.assign({}, stateCopy.venues[i]);
-        stateCopy.venues[i].info = data;
-        stateCopy.venues[i].rating = data.rating;
         this.setState(stateCopy);
       });
     }
@@ -162,76 +172,66 @@ class App extends Component {
       center: {lat: 33.503333, lng: -117.123611},
         zoom: 11
     });
-    this.setState({map: map, filteredResults: this.state.venues});
-    this.loadMarkers(this.state.map);
+    let largeInfoWindow = new window.google.maps.InfoWindow();
+    let bounds = new window.google.maps.LatLngBounds();
+    this.setState({map: map, filteredResults: this.state.venues, largeInfoWindow: largeInfoWindow, bounds: bounds});
+    this.loadMarkers(this.state.map, largeInfoWindow, bounds);
   }
 
-  loadMarkers = (map) => {
-    let markers = [];
-    markers=this.state.markers;
+  loadMarkers = (map, largeInfoWindow, bounds) => {
+    window.populateInfoWindow = this.populateInfoWindow;
+    let markers = this.state.markers;
     let venues = this.state.filteredResults;
-    venues.map(venue => {
+    venues.forEach(venue => {
       let position = venue.location;
       let title = venue.title;
-      let info = venue.info;
-      let reviews = venue.reviews;
+      let address = venue.address;
       let id = venue.id;
       let marker = new window.google.maps.Marker({
         position: position,
-        title: title,
-        info: info,
-        reviews: reviews,
         map: map,
-        animation: window.google.maps.Animation.DROP,
-        id: id
+        title: title,
+        address: address,
+        id: id,
+        animation: window.google.maps.Animation.DROP
+      });
+      bounds.extend(marker.position);
+      marker.addListener('click', function() {
+        window.populateInfoWindow(map, marker, largeInfoWindow);
       });
       markers.push(marker);
-    })
-this.populateInfoWindow(this.state.map);
-
-
+      map.fitBounds(bounds);
+    });
   }
 
-  populateInfoWindow = (map) => {
-    this.state.markers.map(marker=>{
-      marker.addListener('click', function() {
-        loadYelpEmbedScript();
-        populateInfoWindow(marker, largeInfowindow);
+  populateInfoWindow = (map, marker, infowindow) => {
+    let contentString = `<h3>${marker.title}</h3><h4>${marker.address}</h4>`;
+    if (infowindow.marker !== marker) {
+      infowindow.setContent('');
+      infowindow.marker = marker;
+      infowindow.addListener('closeclick', function() {
+        infowindow.marker = null;
       });
-      let largeInfowindow = new window.google.maps.InfoWindow();
-      function loadYelpEmbedScript()  {
-        let container = document.getElementById('yelpReview');
-        let scriptYelp = document.createElement('script');
-        scriptYelp.src= "https://www.yelp.com/embed/widgets.js";
-        scriptYelp.async= true;
-        container.appendChild(scriptYelp);
-      }
+      infowindow.setContent(contentString);
+      infowindow.open(map, marker);
+    }
+  }
 
-      function populateInfoWindow(marker, infowindow) {
-        let infocontent = renderToString(<InfoWindowContent result={marker}/>);
-        if (infowindow.marker !== marker) {
-          infowindow.setContent('');
-          infowindow.marker = marker;
-          infowindow.addListener('closeclick', function() {
-            infowindow.marker = null;
-          });
-          infowindow.setContent(infocontent);
-          infowindow.open(map, marker);
-        }
-      }
-
-    })
+  clearMarkers = (markers) => {
+    for (let c=0; c<markers.length; c++) {
+      markers[c].setMap(null);
+    }
   }
 
   selectRating = (value) => {
-    let filteredResults = this.state.venues.filter((venue)=> venue.info.rating >= value);
-    filteredResults = filteredResults.filter((venue)=> venue.price<= Number(this.state.priceSelect));
+    let filteredResults = this.state.venues.filter((venue) => venue.rating >= Number(value));
+    filteredResults = filteredResults.filter((venue) => venue.price <= Number(this.state.priceSelect));
     this.setState({ratingSelect: value, filteredResults: filteredResults});
   }
 
   selectPrice = (value) => {
-    let filteredResults = this.state.venues.filter((venue)=> venue.info.rating >= this.state.ratingSelect);
-    filteredResults = filteredResults.filter((venue)=> venue.price<= Number(value));
+    let filteredResults = this.state.venues.filter((venue) => venue.rating >= Number(this.state.ratingSelect));
+    filteredResults = filteredResults.filter((venue) => venue.price <= Number(value));
     this.setState({priceSelect: value, filteredResults: filteredResults});
   }
 
@@ -240,8 +240,7 @@ this.populateInfoWindow(this.state.map);
       <div className="App">
         <div id="container">
           <List filteredResults={this.state.filteredResults} selectRating={this.selectRating} selectPrice={this.selectPrice} ratingSelect={this.state.ratingSelect} priceSelect={this.state.priceSelect} />
-          <Map filteredResults={this.state.filteredResults} markers={this.state.markers} loadMarkers={this.loadMarkers} loadMapsAPI={this.loadMapsAPI} loadYelpAPI={this.loadYelpAPI} map={this.state.map}/>
-
+          <Map map={this.state.map} markers={this.state.markers} largeInfoWindow={this.state.largeInfoWindow} bounds={this.state.bounds} loadMarkers={this.loadMarkers} clearMarkers={this.clearMarkers} />
         </div>
       </div>
     );

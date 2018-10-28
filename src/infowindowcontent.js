@@ -14,6 +14,8 @@ class InfoWindowContent extends React.Component {
     container.appendChild(scriptYelp);
   }
 
+
+
 // TODO: for each of state.filteredresults fill venue title, location, price, size img src and review id's/if available
 // TODO: bug! clear yelp reviews each time it rerenders
 
