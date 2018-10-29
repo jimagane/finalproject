@@ -6,10 +6,15 @@ class InfoWindowContent extends React.Component {
     let allMarkers = this.props.markers;
     for (const marker of allMarkers) {
       if (result.id === marker.id) {
+        marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
         marker.setAnimation(window.google.maps.Animation.BOUNCE);
         window.setTimeout(function() {
           marker.setAnimation(null);
         }, 1200);
+        this.props.populateInfoWindow(this.props.map, marker, this.props.largeInfoWindow);
+      }
+      if (result.id !== marker.id) {
+        marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
       }
     }
   }

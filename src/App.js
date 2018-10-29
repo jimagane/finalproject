@@ -202,11 +202,16 @@ class App extends Component {
         title: title,
         address: address,
         id: id,
+        icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
         animation: window.google.maps.Animation.DROP
       });
       bounds.extend(marker.position);
       marker.addListener('click', function() {
+        for (const marker of markers) {
+          marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
+        }
         window.populateInfoWindow(map, marker, largeInfoWindow);
+        marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
       });
       markers.push(marker);
       map.fitBounds(bounds);
@@ -220,6 +225,7 @@ class App extends Component {
       infowindow.marker = marker;
       infowindow.addListener('closeclick', function() {
         infowindow.marker = null;
+        marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
       });
       infowindow.setContent(contentString);
       infowindow.open(map, marker);
@@ -229,7 +235,7 @@ class App extends Component {
   clearMarkers = (markers) => {
     for (let c=0; c<markers.length; c++) {
       markers[c].setMap(null);
-    }
+    };
   }
 
   selectRating = (value) => {
@@ -248,7 +254,7 @@ class App extends Component {
     return (
       <div className="App">
         <div id="container">
-          <List venues={this.state.venues} filteredResults={this.state.filteredResults} selectRating={this.selectRating} selectPrice={this.selectPrice} ratingSelect={this.state.ratingSelect} priceSelect={this.state.priceSelect} markers={this.state.markers}/>
+          <List venues={this.state.venues} filteredResults={this.state.filteredResults} selectRating={this.selectRating} selectPrice={this.selectPrice} ratingSelect={this.state.ratingSelect} priceSelect={this.state.priceSelect} map={this.state.map} markers={this.state.markers} largeInfoWindow={this.state.largeInfoWindow} populateInfoWindow={this.populateInfoWindow} />
           <Map map={this.state.map} markers={this.state.markers} largeInfoWindow={this.state.largeInfoWindow} bounds={this.state.bounds} loadMarkers={this.loadMarkers} clearMarkers={this.clearMarkers} />
         </div>
       </div>
