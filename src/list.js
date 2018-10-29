@@ -27,10 +27,10 @@ class List extends React.Component {
 
         <main id="maincontent">
           <section id="list-container">
-            <h3>Results:</h3>
+            <h5>Showing Results: {this.props.filteredResults.length} / {this.props.venues.length}</h5>
             <ul id="venues-list">
               {this.props.filteredResults.map((result) => (
-                <InfoWindowContent key={result.id} result={result} />
+                <InfoWindowContent key={result.id} result={result} markers={this.props.markers} />
               ))}
             </ul>
           </section>

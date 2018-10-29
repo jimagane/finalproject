@@ -15,7 +15,7 @@ class App extends Component {
         url: 'http://villadeamore.com',
         rating: '4.7',
         price: '16000',
-        reviews: '...loading reviews',
+        reviews: [],
         info: '',
         id: 'y8DBzKXqy0nzgTPBw89bgg'
       },
@@ -27,7 +27,7 @@ class App extends Component {
         url: 'http://secludedgardenestate.com',
         rating: '4.5',
         price: '3400',
-        reviews: '...loading reviews',
+        reviews: [],
         info: '',
         id: 'ypUdrtD3fGe0kU5IaQnSeA'
       },
@@ -39,7 +39,7 @@ class App extends Component {
         url: 'https://owlcreekfarms.com/',
         rating: '4.1',
         price: '10000',
-        reviews: '...loading reviews',
+        reviews: [],
         info: '',
         id: 'iEHozPii1VYaHL7QHOK3Og'
       },
@@ -51,7 +51,7 @@ class App extends Component {
         url: 'https://monteleonemeadows.com/',
         rating: '4.8',
         price: '9000',
-        reviews: '...loading reviews',
+        reviews: [],
         info: '',
         id: 'S5YSydq99nnll---vzi-vA'
       },
@@ -63,7 +63,7 @@ class App extends Component {
         url: 'https://www.wedgewoodweddings.com/venues/southern-california/galway-downs',
         rating: '3.2',
         price: '11000',
-        reviews: '...loading reviews',
+        reviews: [],
         info: '',
         id: '6Xmhd44RbaDiDoegmjuH6Q'
       },
@@ -75,7 +75,7 @@ class App extends Component {
         url: 'https://www.mountpalomarwinery.com/',
         rating: '4.5',
         price: '8300',
-        reviews: '...loading reviews',
+        reviews: [],
         info: '',
         id: 'QhSHKkDGSkawp_QxSloq_g'
       },
@@ -87,7 +87,7 @@ class App extends Component {
         url: 'https://www.lorimarwinery.com/',
         rating: '4.5',
         price: '11000',
-        reviews: '...loading reviews',
+        reviews: [],
         info: '',
         id: 'cfLGt932AJRHTBGf8_uZsw'
       },
@@ -99,7 +99,7 @@ class App extends Component {
         url: 'http://chapelofmemories.org/',
         rating: '4.8',
         price: '2400',
-        reviews: '...loading reviews',
+        reviews: [],
         info: '',
         id: '9Bs0a3sL8vaLWnllC2_nuA'
       },
@@ -111,7 +111,7 @@ class App extends Component {
         url: 'https://www.abbottmanor.com/',
         rating: '4.5',
         price: '9000',
-        reviews: '...loading reviews',
+        reviews: [],
         info: '',
         id: '3UKrnJW2iq6f0drfo73UnQ'
       },
@@ -123,7 +123,7 @@ class App extends Component {
         url: 'http://www.chapelinthevines.com/',
         rating: '3.0',
         price: '400',
-        reviews: '...loading reviews',
+        reviews: [],
         info: '',
         id: 'De_mw0NexoKsBmWd-XcaXw'
       }
@@ -140,6 +140,7 @@ class App extends Component {
 
   componentDidMount() {
     // this.loadYelpAPI();
+    this.loadYelpEmbedScript();
     window.initMap = this.initMap;
     this.loadMapsAPI();
   }
@@ -156,6 +157,14 @@ class App extends Component {
         this.setState(stateCopy);
       });
     }
+  }
+
+  loadYelpEmbedScript = () => {
+    let container = document.getElementById('container');
+    let scriptYelp = document.createElement('script');
+    scriptYelp.src= "https://www.yelp.com/embed/widgets.js";
+    scriptYelp.async= true;
+    container.appendChild(scriptYelp);
   }
 
   loadMapsAPI = () => {
@@ -239,7 +248,7 @@ class App extends Component {
     return (
       <div className="App">
         <div id="container">
-          <List filteredResults={this.state.filteredResults} selectRating={this.selectRating} selectPrice={this.selectPrice} ratingSelect={this.state.ratingSelect} priceSelect={this.state.priceSelect} />
+          <List venues={this.state.venues} filteredResults={this.state.filteredResults} selectRating={this.selectRating} selectPrice={this.selectPrice} ratingSelect={this.state.ratingSelect} priceSelect={this.state.priceSelect} markers={this.state.markers}/>
           <Map map={this.state.map} markers={this.state.markers} largeInfoWindow={this.state.largeInfoWindow} bounds={this.state.bounds} loadMarkers={this.loadMarkers} clearMarkers={this.clearMarkers} />
         </div>
       </div>
