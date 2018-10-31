@@ -31,12 +31,20 @@
   }
 }
 
+#container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+}
+
 #map {
   height: 100%;
   left: 372px;
   right: 0px;
-  bottom:0px;
-  position: fixed;
+  bottom: 0px;
+  position: absolute;
   z-index: 1000;
 }
 
