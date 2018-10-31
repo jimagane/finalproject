@@ -4,9 +4,9 @@ class InfoWindowContent extends React.Component {
 
   render() {
     return (
-      <div id="infoContainer" onClick={event=> this.props.handleListClick(this.props.result)}>
+      <div id={this.props.result.id} onClick={event=> this.props.handleListClick(this.props.result)}>
         <div id="venueDetails">
-          <a href={this.props.result.url} target="_blank"><h3>{this.props.result.title}</h3></a>
+          <a href={this.props.result.url} target="_blank" rel="noopener noreferrer"><h3>{this.props.result.title}</h3></a>
             <p>{this.props.result.address}</p>
             <p>{this.props.result.phone}</p>
             <p>Rating: {this.props.result.rating}/5</p>

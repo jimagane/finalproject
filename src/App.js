@@ -3,6 +3,7 @@ import './App.css';
 import Map from './map';
 import List from './list';
 import * as YelpAPI from './YelpAPI';
+import scrollToComponent from 'react-scroll-to-component';
 
 class App extends Component {
   state = {
@@ -189,6 +190,7 @@ class App extends Component {
 
   loadMarkers = (map, largeInfoWindow, bounds) => {
     window.populateInfoWindow = this.populateInfoWindow;
+    window.scrollToList = this.scrollToList;
     let markers = this.state.markers;
     let venues = this.state.filteredResults;
     venues.forEach(venue => {
@@ -212,6 +214,7 @@ class App extends Component {
         }
         window.populateInfoWindow(map, marker, largeInfoWindow);
         marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
+        window.scrollToList(marker.id);
       });
       markers.push(marker);
       map.fitBounds(bounds);
@@ -253,6 +256,11 @@ class App extends Component {
         marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
       }
     }
+  }
+
+  scrollToList = (id) => {
+    let item = document.getElementById(id);
+    scrollToComponent(item);
   }
 
   selectRating = (value) => {

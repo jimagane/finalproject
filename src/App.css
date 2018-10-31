@@ -36,7 +36,7 @@
   left: 372px;
   right: 0px;
   bottom:0px;
-  position: absolute;
+  position: fixed;
 }
 
 .options-box {
@@ -72,9 +72,15 @@ h2 {
 
 #maincontent {
   background-color: white;
+  height: auto;
+  width: 100%;
+  overflow: none;
+}
+
+#venues-list {
   height: 500px;
-  width: auto;
-  overflow: auto;
+  width: 100%;
+  overflow: none;
 }
 
 h5 {
@@ -92,17 +98,18 @@ ul {
 }
 
 #infoContainer {
-  width: 360px;
+  width: 100%;
   height: 500px;
 
 }
 
 #venueDetails {
   height: 200px;
+  width: 100%;
 }
 
 #yelpBox {
-  width: 360px;
+  width: 100%;
   height: 300px;
   overflow: scroll;
 }
