@@ -238,6 +238,23 @@ class App extends Component {
     };
   }
 
+  handleListClick = (result) => {
+    let allMarkers = this.state.markers;
+    for (const marker of allMarkers) {
+      if (result.id === marker.id) {
+        marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
+        marker.setAnimation(window.google.maps.Animation.BOUNCE);
+        window.setTimeout(function() {
+          marker.setAnimation(null);
+        }, 1200);
+        this.populateInfoWindow(this.state.map, marker, this.state.largeInfoWindow);
+      }
+      if (result.id !== marker.id) {
+        marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
+      }
+    }
+  }
+
   selectRating = (value) => {
     let filteredResults = this.state.venues.filter((venue) => venue.rating >= Number(value));
     filteredResults = filteredResults.filter((venue) => venue.price <= Number(this.state.priceSelect));
@@ -254,7 +271,7 @@ class App extends Component {
     return (
       <div className="App">
         <div id="container">
-          <List venues={this.state.venues} filteredResults={this.state.filteredResults} selectRating={this.selectRating} selectPrice={this.selectPrice} ratingSelect={this.state.ratingSelect} priceSelect={this.state.priceSelect} map={this.state.map} markers={this.state.markers} largeInfoWindow={this.state.largeInfoWindow} populateInfoWindow={this.populateInfoWindow} />
+          <List venues={this.state.venues} filteredResults={this.state.filteredResults} selectRating={this.selectRating} selectPrice={this.selectPrice} ratingSelect={this.state.ratingSelect} priceSelect={this.state.priceSelect} handleListClick={this.handleListClick} />
           <Map map={this.state.map} markers={this.state.markers} largeInfoWindow={this.state.largeInfoWindow} bounds={this.state.bounds} loadMarkers={this.loadMarkers} clearMarkers={this.clearMarkers} />
         </div>
       </div>

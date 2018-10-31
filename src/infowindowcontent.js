@@ -2,28 +2,11 @@ import React from 'react';
 
 class InfoWindowContent extends React.Component {
 
-  handleClick = (result) => {
-    let allMarkers = this.props.markers;
-    for (const marker of allMarkers) {
-      if (result.id === marker.id) {
-        marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
-        marker.setAnimation(window.google.maps.Animation.BOUNCE);
-        window.setTimeout(function() {
-          marker.setAnimation(null);
-        }, 1200);
-        this.props.populateInfoWindow(this.props.map, marker, this.props.largeInfoWindow);
-      }
-      if (result.id !== marker.id) {
-        marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
-      }
-    }
-  }
-
   render() {
     return (
-      <div id="infoContainer" onClick={event=> this.handleClick(this.props.result)}>
+      <div id="infoContainer" onClick={event=> this.props.handleListClick(this.props.result)}>
         <div id="venueDetails">
-          <a href={this.props.result.url}><h3>{this.props.result.title}</h3></a>
+          <a href={this.props.result.url} target="_blank"><h3>{this.props.result.title}</h3></a>
             <p>{this.props.result.address}</p>
             <p>{this.props.result.phone}</p>
             <p>Rating: {this.props.result.rating}/5</p>
