@@ -216,6 +216,16 @@ class App extends Component {
         marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
         window.scrollToList(marker.id);
       });
+      marker.addListener('mouseover', function() {
+        if (this.icon === 'http://maps.google.com/mapfiles/ms/icons/red-dot.png') {
+          this.setIcon('http://maps.google.com/mapfiles/ms/icons/yellow-dot.png')
+        }
+      });
+      marker.addListener('mouseout', function() {
+        if (this.icon === 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png') {
+          this.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png')
+        }
+      });
       markers.push(marker);
       map.fitBounds(bounds);
     });
