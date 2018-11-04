@@ -232,7 +232,7 @@ class App extends Component {
   }
 
   populateInfoWindow = (map, marker, infowindow) => {
-    let contentString = `<h3>${marker.title}</h3><h4>${marker.address}</h4>`;
+    let contentString = `<div class="infocontent"><h3>${marker.title}</h3><h4>${marker.address}</h4></div>`;
     if (infowindow.marker !== marker) {
       infowindow.setContent('');
       infowindow.marker = marker;
@@ -285,10 +285,15 @@ class App extends Component {
     this.setState({priceSelect: value, filteredResults: filteredResults});
   }
 
+  showReviews = () => {
+    let reviews = document.getElementById('yelpReview');
+    console.log(reviews);
+  }
+
   render() {
     return (
       <div className="App">
-        <List venues={this.state.venues} filteredResults={this.state.filteredResults} selectRating={this.selectRating} selectPrice={this.selectPrice} ratingSelect={this.state.ratingSelect} priceSelect={this.state.priceSelect} handleListClick={this.handleListClick} />
+        <List venues={this.state.venues} filteredResults={this.state.filteredResults} selectRating={this.selectRating} selectPrice={this.selectPrice} ratingSelect={this.state.ratingSelect} priceSelect={this.state.priceSelect} handleListClick={this.handleListClick} showReviews={this.showReviews} />
         <div id="container">
           <Map map={this.state.map} markers={this.state.markers} largeInfoWindow={this.state.largeInfoWindow} bounds={this.state.bounds} loadMarkers={this.loadMarkers} clearMarkers={this.clearMarkers} />
         </div>
