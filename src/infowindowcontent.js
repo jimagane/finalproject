@@ -3,11 +3,8 @@ import React from 'react';
 class InfoWindowContent extends React.Component {
 
   state = {
-    active: true,
-    button: 'See Reviews',
-    first: '',
-    second: '',
-    third: ''
+    active: false,
+    button: 'See Reviews'
   }
 
   showReview = (id) => {
@@ -18,28 +15,10 @@ class InfoWindowContent extends React.Component {
     } else {
       reviewsButton = 'See Reviews';
     }
-    this.getReviews();
     this.setState({active: !current, button: reviewsButton});
   }
 
-  getReviews = () => {
-    let reviews = this.props.result.reviews;
-    let first = '';
-    let second ='';
-    let third = '';
-    if (reviews !== undefined) {
-      if (reviews.length > 0) {
-        first = `'${reviews[0].id}'`;
-        second = `'${reviews[1].id}'`;
-        third = `'${reviews[2].id}'`;
-      }
-    }
-    this.setState({first: first, second: second, third: third})
-  }
-
   render() {
-
-
     return (
       <div className="listitem" id={this.props.result.id} onClick={event=> this.props.handleListClick(this.props.result)}>
         <div id="venueDetails">
@@ -51,7 +30,7 @@ class InfoWindowContent extends React.Component {
         <div id="yelpBox">
           <button id="reviewsButton" ref={this.props.result.id} onClick={this.showReview}>{this.state.button}</button>
           <div id="yelpReview" className={this.state.active?'showReview': null}>
-            <span className="yelp-review" data-review-id={this.state.first} data-hostname="www.yelp.com"></span>
+            <span className="yelp-review" data-review-id="KNpcEBZXlF3n4C8STFi2vQ" data-hostname="www.yelp.com"></span>
           </div>
         </div>
       </div>

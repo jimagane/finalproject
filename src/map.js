@@ -26,7 +26,7 @@ class Map extends React.Component {
     return (
       <div>
         <button id="mapButton" onClick={this.toggleClass}>Hide Map</button>
-        <div id="map" className={this.state.active?'hideMap': null}>
+        <div id="map" className={this.state.active ? 'hideMap' : null}>
           {this.props.clearMarkers(this.props.markers)}
           {this.props.loadMarkers(this.props.map, this.props.largeInfoWindow, this.props.bounds)}
         </div>

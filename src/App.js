@@ -130,7 +130,6 @@ class App extends Component {
       }
     ],
     map: null,
-    reviewsDB: {},
     filteredResults: [],
     markers: [],
     largeInfoWindow: {},
@@ -162,7 +161,7 @@ class App extends Component {
   }
 
   loadYelpEmbedScript = () => {
-    let container = document.getElementById('container');
+    let container = document.getElementById('app');
     let scriptYelp = document.createElement('script');
     scriptYelp.src= "https://www.yelp.com/embed/widgets.js";
     scriptYelp.async= true;
@@ -170,7 +169,7 @@ class App extends Component {
   }
 
   loadMapsAPI = () => {
-    let container = document.getElementById('container');
+    let container = document.getElementById('app');
     let script = document.createElement('script');
     script.src= "https://maps.googleapis.com/maps/api/js?key=AIzaSyBAhV7AdJGxUzx4KdpKX8Q6GDrYmV3V4yw&v=3&callback=initMap";
     script.async= true;
@@ -288,7 +287,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="App" id="app">
         <List venues={this.state.venues} filteredResults={this.state.filteredResults} selectRating={this.selectRating} selectPrice={this.selectPrice} ratingSelect={this.state.ratingSelect} priceSelect={this.state.priceSelect} handleListClick={this.handleListClick} />
         <div id="container">
           <Map map={this.state.map} markers={this.state.markers} largeInfoWindow={this.state.largeInfoWindow} bounds={this.state.bounds} loadMarkers={this.loadMarkers} clearMarkers={this.clearMarkers} />

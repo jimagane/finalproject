@@ -9,7 +9,7 @@ const headers = {
 export const getReviews = (locationId) =>
   fetch(`${corsAnywhere}/${api}/${locationId}/reviews`, {headers})
     .then(res => res.json())
-    .then(data => data)
+    .then(data => data.reviews)
 
 export const getBusinessInfo = (locationId) =>
   fetch(`${corsAnywhere}/${api}/${locationId}`, {headers})
