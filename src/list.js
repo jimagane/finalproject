@@ -30,7 +30,7 @@ class List extends React.Component {
             <h2>Showing Results: {this.props.filteredResults.length} / {this.props.venues.length}</h2>
             <ul id="venues-list">
               {this.props.filteredResults.map((result) => (
-                <InfoWindowContent key={result.id} result={result} handleListClick={this.props.handleListClick} showReviews={this.props.showReviews} />
+                <InfoWindowContent key={result.id} result={result} handleListClick={this.props.handleListClick} />
               ))}
             </ul>
           </section>

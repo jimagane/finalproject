@@ -140,7 +140,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // this.loadYelpAPI();
+    this.loadYelpAPI();
     this.loadYelpEmbedScript();
     window.initMap = this.initMap;
     this.loadMapsAPI();
@@ -156,6 +156,7 @@ class App extends Component {
         stateCopy.venues[i] = Object.assign({}, stateCopy.venues[i]);
         stateCopy.venues[i].reviews = data;
         this.setState(stateCopy);
+        this.setState({filteredResults: this.state.venues});
       });
     }
   }
@@ -285,15 +286,10 @@ class App extends Component {
     this.setState({priceSelect: value, filteredResults: filteredResults});
   }
 
-  showReviews = () => {
-    let reviews = document.getElementById('yelpReview');
-    console.log(reviews);
-  }
-
   render() {
     return (
       <div className="App">
-        <List venues={this.state.venues} filteredResults={this.state.filteredResults} selectRating={this.selectRating} selectPrice={this.selectPrice} ratingSelect={this.state.ratingSelect} priceSelect={this.state.priceSelect} handleListClick={this.handleListClick} showReviews={this.showReviews} />
+        <List venues={this.state.venues} filteredResults={this.state.filteredResults} selectRating={this.selectRating} selectPrice={this.selectPrice} ratingSelect={this.state.ratingSelect} priceSelect={this.state.priceSelect} handleListClick={this.handleListClick} />
         <div id="container">
           <Map map={this.state.map} markers={this.state.markers} largeInfoWindow={this.state.largeInfoWindow} bounds={this.state.bounds} loadMarkers={this.loadMarkers} clearMarkers={this.clearMarkers} />
         </div>
