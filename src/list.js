@@ -3,19 +3,6 @@ import InfoWindowContent from './infowindowcontent';
 
 class List extends React.Component {
 
-  state = {
-    id: ''
-  }
-
-  updateid = () => {
-    let list = this.props.filteredResults;
-    for (let i = 0; i < list.length; i++) {
-      if(list[i].reviews !== undefined && list[i].reviews.length>0){
-        this.setState({id: list[i].reviews[0].id})
-      }
-    }
-  }
-
   render() {
     return(
       <div className="options-box">
@@ -43,7 +30,7 @@ class List extends React.Component {
             <h2>Showing Results: {this.props.filteredResults.length} / {this.props.venues.length}</h2>
             <ul id="venues-list">
               {this.props.filteredResults.map((result) => (
-                <InfoWindowContent key={result.id} result={result} handleListClick={this.props.handleListClick} updateid={this.updateid}/>
+                <InfoWindowContent key={result.id} result={result} handleListClick={this.props.handleListClick} reloadReview={this.props.reloadReview} />
               ))}
             </ul>
           </section>

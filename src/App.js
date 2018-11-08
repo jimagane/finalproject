@@ -38,7 +38,7 @@ class App extends Component {
         address: '37901 Sage Rd, Hemet, CA 92544',
         phone: '(410) 533-9081',
         url: 'https://owlcreekfarms.com/',
-        rating: '4.1',
+        rating: '3.5',
         price: '10000',
         reviews: [],
         info: '',
@@ -50,7 +50,7 @@ class App extends Component {
         address: '35245 Briggs Rd, Murrieta, CA 92563',
         phone: '(951) 677-6403',
         url: 'https://monteleonemeadows.com/',
-        rating: '4.8',
+        rating: '5.0',
         price: '9000',
         reviews: [],
         info: '',
@@ -62,7 +62,7 @@ class App extends Component {
         address: '38801 Los Corralitos Rd, Temecula, CA 92592',
         phone: '(866) 966-3009',
         url: 'https://www.wedgewoodweddings.com/venues/southern-california/galway-downs',
-        rating: '3.2',
+        rating: '5.0',
         price: '11000',
         reviews: [],
         info: '',
@@ -74,7 +74,7 @@ class App extends Component {
         address: '33820 Rancho California Rd, Temecula, CA 92591',
         phone: '(951) 676-5047',
         url: 'https://www.mountpalomarwinery.com/',
-        rating: '4.5',
+        rating: '4.0',
         price: '8300',
         reviews: [],
         info: '',
@@ -86,7 +86,7 @@ class App extends Component {
         address: '39990 Anza Rd, Temecula, CA 92591',
         phone: '(951) 694-6699',
         url: 'https://www.lorimarwinery.com/',
-        rating: '4.5',
+        rating: '4.0',
         price: '11000',
         reviews: [],
         info: '',
@@ -98,7 +98,7 @@ class App extends Component {
         address: '28300 Mercedes St, Temecula, CA 92590',
         phone: '(951) 265-7720',
         url: 'http://chapelofmemories.org/',
-        rating: '4.8',
+        rating: '4.0',
         price: '2400',
         reviews: [],
         info: '',
@@ -110,7 +110,7 @@ class App extends Component {
         address: '40350 Camino Del Vino, Temecula, CA 92592',
         phone: '(951) 834-8406',
         url: 'https://www.abbottmanor.com/',
-        rating: '4.5',
+        rating: '5.0',
         price: '9000',
         reviews: [],
         info: '',
@@ -122,7 +122,7 @@ class App extends Component {
         address: '41955 Main St, Temecula, CA 92590',
         phone: '(951) 258-5599',
         url: 'http://www.chapelinthevines.com/',
-        rating: '3.0',
+        rating: '4.5',
         price: '400',
         reviews: [],
         info: '',
@@ -140,7 +140,6 @@ class App extends Component {
 
   componentDidMount() {
     this.loadYelpAPI();
-    this.loadYelpEmbedScript();
     window.initMap = this.initMap;
     this.loadMapsAPI();
   }
@@ -160,12 +159,20 @@ class App extends Component {
     }
   }
 
-  loadYelpEmbedScript = () => {
-    let container = document.getElementById('app');
-    let scriptYelp = document.createElement('script');
-    scriptYelp.src= "https://www.yelp.com/embed/widgets.js";
-    scriptYelp.async= true;
-    container.appendChild(scriptYelp);
+  reloadReview = (id) => {
+    for (let i = 0; i < this.state.venues.length; i++) {
+      if (this.state.venues[i].id === id) {
+        YelpAPI.getReviews(this.state.venues[i].id)
+        .then(data => {
+          // Code solution for updating single property of object in array via copying object and slicing, credit to Radosław Miernik, url: 'https://stackoverflow.com/questions/35174489/reactjs-setstate-of-object-key-in-array/35174579'
+          let stateCopy = Object.assign({}, this.state);
+          stateCopy.venues = stateCopy.venues.slice();
+          stateCopy.venues[i] = Object.assign({}, stateCopy.venues[i]);
+          stateCopy.venues[i].reviews = data;
+          this.setState(stateCopy);
+        });
+      }
+    }
   }
 
   loadMapsAPI = () => {
@@ -288,7 +295,7 @@ class App extends Component {
   render() {
     return (
       <div className="App" id="app">
-        <List venues={this.state.venues} filteredResults={this.state.filteredResults} selectRating={this.selectRating} selectPrice={this.selectPrice} ratingSelect={this.state.ratingSelect} priceSelect={this.state.priceSelect} handleListClick={this.handleListClick} />
+        <List venues={this.state.venues} filteredResults={this.state.filteredResults} selectRating={this.selectRating} selectPrice={this.selectPrice} ratingSelect={this.state.ratingSelect} priceSelect={this.state.priceSelect} handleListClick={this.handleListClick} reloadReview={this.reloadReview} />
         <div id="container">
           <Map map={this.state.map} markers={this.state.markers} largeInfoWindow={this.state.largeInfoWindow} bounds={this.state.bounds} loadMarkers={this.loadMarkers} clearMarkers={this.clearMarkers} />
         </div>
