@@ -10,15 +10,19 @@ class Map extends React.Component {
     const current = this.state.active;
     this.setState({active: !current});
     let buttonMap = document.getElementById('mapButton');
-    let listvenues = document.getElementById('maincontent');
+    let appcontainer = document.getElementById('app');
+    let mapcontainer = document.getElementById('container');
     if (buttonMap.innerText === 'Hide Map') {
       buttonMap.innerText = 'Show Map';
       buttonMap.style.bottom = '0';
-      listvenues.style.paddingBottom = '2%';
+      appcontainer.style.height = '100%';
+      mapcontainer.style.top = '100%';
     } else {
       buttonMap.innerText = 'Hide Map';
-      buttonMap.style.bottom = '80%';
-      listvenues.style.paddingBottom = '50%';
+      buttonMap.style.bottom = '25%';
+      appcontainer.style.height = '70%';
+      mapcontainer.style.top = '70%';
+
     }
   }
 

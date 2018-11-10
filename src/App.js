@@ -139,7 +139,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // this.loadYelpAPI();
+    this.loadYelpAPI();
     window.initMap = this.initMap;
     this.loadMapsAPI();
   }
@@ -178,7 +178,7 @@ class App extends Component {
   loadMapsAPI = () => {
     let container = document.getElementById('app');
     let script = document.createElement('script');
-    script.src= "https://maps.googleapis.com/maps/api/js?key=AIzaSyBAhV7AdJGxUzx4KdpKX8Q6GDrYmV3V4yw&v=3&callback=initMap";
+    script.src= "https://mps.googleapis.com/maps/api/js?key=AIzaSyBAhV7AdJGxUzx4KdpKX8Q6GDrYmV3V4yw&v=3&callback=initMap";
     script.async= true;
     script.defer= true;
     container.appendChild(script);
@@ -196,48 +196,50 @@ class App extends Component {
   }
 
   loadMarkers = (map, largeInfoWindow, bounds) => {
-    window.populateInfoWindow = this.populateInfoWindow;
-    window.scrollToList = this.scrollToList;
+    if (window.google !== undefined) {
+      window.populateInfoWindow = this.populateInfoWindow;
+      window.scrollToList = this.scrollToList;
 
-    let markers = this.state.markers;
-    let venues = this.state.filteredResults;
-    for (let i=0; i<venues.length; i++) {
-      let labels = `${i+1} of ${venues.length}`;
-      let position = venues[i].location;
-      let title = venues[i].title;
-      let address = venues[i].address;
-      let id = venues[i].id;
-      let marker = new window.google.maps.Marker({
-        position: position,
-        map: map,
-        title: title,
-        address: address,
-        id: id,
-        icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
-        animation: window.google.maps.Animation.DROP
-      });
-      bounds.extend(marker.position);
-      marker.addListener('click', function() {
-        for (const marker of markers) {
-          marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
-        }
-        window.populateInfoWindow(map, marker, largeInfoWindow);
-        marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
-        window.scrollToList(marker.id);
-      });
-      marker.addListener('mouseover', function() {
-        if (this.icon === 'http://maps.google.com/mapfiles/ms/icons/red-dot.png') {
-          this.setIcon('http://maps.google.com/mapfiles/ms/icons/yellow-dot.png')
-        }
-      });
-      marker.addListener('mouseout', function() {
-        if (this.icon === 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png') {
-          this.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png')
-        }
-      });
-      markers.push(marker);
-      map.fitBounds(bounds);
-    };
+      let markers = this.state.markers;
+      let venues = this.state.filteredResults;
+      for (let i=0; i<venues.length; i++) {
+        let labels = `${i+1} of ${venues.length}`;
+        let position = venues[i].location;
+        let title = venues[i].title;
+        let address = venues[i].address;
+        let id = venues[i].id;
+        let marker = new window.google.maps.Marker({
+          position: position,
+          map: map,
+          title: title,
+          address: address,
+          id: id,
+          icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
+          animation: window.google.maps.Animation.DROP
+        });
+        bounds.extend(marker.position);
+        marker.addListener('click', function() {
+          for (const marker of markers) {
+            marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
+          }
+          window.populateInfoWindow(map, marker, largeInfoWindow);
+          marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
+          window.scrollToList(marker.id);
+        });
+        marker.addListener('mouseover', function() {
+          if (this.icon === 'http://maps.google.com/mapfiles/ms/icons/red-dot.png') {
+            this.setIcon('http://maps.google.com/mapfiles/ms/icons/yellow-dot.png')
+          }
+        });
+        marker.addListener('mouseout', function() {
+          if (this.icon === 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png') {
+            this.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png')
+          }
+        });
+        markers.push(marker);
+        map.fitBounds(bounds);
+      };
+    }
   }
 
   populateInfoWindow = (map, marker, infowindow) => {
