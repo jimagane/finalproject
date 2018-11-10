@@ -20,6 +20,7 @@ class InfoWindowContent extends React.Component {
       reviewsButton = 'See Reviews';
     }
     this.setState({active: !current, button: reviewsButton});
+
   }
 
   renderReviews = () => {
@@ -34,7 +35,7 @@ class InfoWindowContent extends React.Component {
       </div>
     } else {
       // this.props.reloadReview(this.props.result.id);
-      return <div>...oops! unable to load reviews</div>
+      return <div tabindex="0" aria-label="error, oops unable to load reviews">...oops! unable to load reviews</div>
     }
   }
 
@@ -47,21 +48,27 @@ class InfoWindowContent extends React.Component {
   }
 
   render() {
+    let labelName = this.props.result.title;
+    if (this.state.button === 'See Reviews') {
+      labelName = `expand ${this.props.result.title} reviews`;
+    } else {
+      labelName = `collapse ${this.props.result.title} reviews`;
+    }
     return (
-      <div className="listitem" id={this.props.result.id} onClick={event=> this.props.handleListClick(this.props.result)}>
+      <li role="presentation" className="listitem" id={this.props.result.id} onClick={event=> this.props.handleListClick(this.props.result)}>
         <div id="venueDetails">
-          <a id="title" href={this.props.result.url} target="_blank" rel="noopener noreferrer"><h3>{this.props.result.title}</h3></a>
+          <a id="title" href={this.props.result.url} target="_blank" rel="noopener noreferrer" role="tab" onFocus={event=> this.props.handleListClick(this.props.result)}><h3>{this.props.result.title}</h3></a>
             <p>{this.props.result.address}</p>
             <p>{this.props.result.phone}</p>
             <p>Rating: {this.props.result.rating}/5</p>
         </div>
         <div id="yelpBox">
-          <button id="reviewsButton" onClick={this.showReview}>{this.state.button}</button>
-          <div id="yelpReview" className={this.state.active ? 'showReview' : 'hideReview'}>
+          <button id="reviewsButton" aria-label={labelName} onClick={this.showReview}>{this.state.button}</button>
+          <div id="yelpReview" aria-label="Yelp reviews" tabindex="0" className={this.state.active ? 'showReview' : 'hideReview'}>
             {this.renderReviews()}
           </div>
         </div>
-      </div>
+      </li>
     )
   }
 };

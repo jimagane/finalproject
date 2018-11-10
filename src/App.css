@@ -16,6 +16,19 @@
   position: absolute;
 }
 
+.skip-link {
+  background-color: white;
+  position: absolute;
+  top: 2%;
+  left: 52%;
+  width: auto;
+  z-index: -1;
+}
+
+.skip-link:focus {
+  z-index: 100;
+}
+
 .options-box {
   background: violet;
   height: 100%;
@@ -68,6 +81,7 @@ h2 {
   border-style: solid;
   border-width: 2px;
   border-color: lightgray;
+  list-style-type: none;
 }
 
 h3 {
@@ -117,6 +131,10 @@ p {
   text-align: center;
 }
 
+#mapButton {
+  display: none;
+}
+
 @media screen and (max-width: 650px) {
   .options-box {
     width: 100%;
@@ -133,6 +151,12 @@ p {
     padding: 2%;
   }
 
+  .skip-link {
+    top: auto;
+    bottom: 5%;
+    left: 2%;
+  }
+
   #reviewsButton {
     padding: 4%;
     color: red;
@@ -144,6 +168,7 @@ p {
   }
 
   #mapButton {
+    display: block;
     background: orange;
     position: absolute;
     bottom: 80%;
@@ -155,9 +180,8 @@ p {
     font-weight: bold;
   }
 
-  .hideMap {
-    position: relative;
-    left: -800px;
+.hideMap {
+    display: none;
   }
 
   #maincontent h3:focus {

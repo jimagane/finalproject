@@ -27,8 +27,9 @@ class List extends React.Component {
 
         <main id="maincontent">
           <section id="list-container">
-            <h2>Showing Results: {this.props.filteredResults.length} / {this.props.venues.length}</h2>
-            <ul id="venues-list">
+            <h2 tabindex="0">Showing Results: {this.props.filteredResults.length} / {this.props.venues.length}</h2>
+            <a href="#map" className="skip-link">Skip to Map</a>
+            <ul role="tablist" id="venues-list">
               {this.props.filteredResults.map((result) => (
                 <InfoWindowContent key={result.id} result={result} handleListClick={this.props.handleListClick} reloadReview={this.props.reloadReview} />
               ))}

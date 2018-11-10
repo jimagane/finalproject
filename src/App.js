@@ -139,7 +139,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.loadYelpAPI();
+    // this.loadYelpAPI();
     window.initMap = this.initMap;
     this.loadMapsAPI();
   }
@@ -198,13 +198,15 @@ class App extends Component {
   loadMarkers = (map, largeInfoWindow, bounds) => {
     window.populateInfoWindow = this.populateInfoWindow;
     window.scrollToList = this.scrollToList;
+
     let markers = this.state.markers;
     let venues = this.state.filteredResults;
-    venues.forEach(venue => {
-      let position = venue.location;
-      let title = venue.title;
-      let address = venue.address;
-      let id = venue.id;
+    for (let i=0; i<venues.length; i++) {
+      let labels = `${i+1} of ${venues.length}`;
+      let position = venues[i].location;
+      let title = venues[i].title;
+      let address = venues[i].address;
+      let id = venues[i].id;
       let marker = new window.google.maps.Marker({
         position: position,
         map: map,
@@ -235,11 +237,11 @@ class App extends Component {
       });
       markers.push(marker);
       map.fitBounds(bounds);
-    });
+    };
   }
 
   populateInfoWindow = (map, marker, infowindow) => {
-    let contentString = `<div class="infocontent"><h3>${marker.title}</h3><h4>${marker.address}</h4></div>`;
+    let contentString = `<div class="infocontent" tabindex="0" aria-label="${marker.title}"><h3>${marker.title}</h3><h4>${marker.address}</h4></div>`;
     if (infowindow.marker !== marker) {
       infowindow.setContent('');
       infowindow.marker = marker;
