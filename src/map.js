@@ -22,7 +22,6 @@ class Map extends React.Component {
       buttonMap.style.bottom = '25%';
       appcontainer.style.height = '70%';
       mapcontainer.style.top = '70%';
-
     }
   }
 

@@ -1,4 +1,3 @@
-console.log('sw working');
 
 self.addEventListener('install', function(event) {
   event.waitUntil(

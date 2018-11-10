@@ -20,7 +20,6 @@ class InfoWindowContent extends React.Component {
       reviewsButton = 'See Reviews';
     }
     this.setState({active: !current, button: reviewsButton});
-
   }
 
   renderReviews = () => {
@@ -34,7 +33,7 @@ class InfoWindowContent extends React.Component {
         <span className="yelp-review" data-review-id={id3} data-hostname="www.yelp.com"></span>
       </div>
     } else {
-      // this.props.reloadReview(this.props.result.id);
+      this.props.reloadReview(this.props.result.id);
       return <div tabindex="0" aria-label="error, oops unable to load reviews">...oops! unable to load reviews</div>
     }
   }

@@ -145,7 +145,6 @@ p {
     overflow: scroll;
   }
 
-
   .options-box {
     width: 100%;
   }
@@ -189,8 +188,6 @@ p {
     display: none;
   }
 
-
-
   #maincontent h3:focus {
     color: purple;
   }
@@ -230,5 +227,4 @@ p {
     text-decoration: underline;
     color: purple;
   }
-
 }

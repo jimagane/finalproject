@@ -202,12 +202,11 @@ class App extends Component {
 
       let markers = this.state.markers;
       let venues = this.state.filteredResults;
-      for (let i=0; i<venues.length; i++) {
-        let labels = `${i+1} of ${venues.length}`;
-        let position = venues[i].location;
-        let title = venues[i].title;
-        let address = venues[i].address;
-        let id = venues[i].id;
+      for (const venue of venues) {
+        let position = venue.location;
+        let title = venue.title;
+        let address = venue.address;
+        let id = venue.id;
         let marker = new window.google.maps.Marker({
           position: position,
           map: map,
