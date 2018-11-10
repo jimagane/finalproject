@@ -4,10 +4,10 @@ import InfoWindowContent from './infowindowcontent';
 class List extends React.Component {
 
   linkToMap = () => {
-    if (this.props.map != null) {
-      return <a href="#container" className="skip-link">Skip to Map</a>
-    } else {
+    if (this.props.map ===null) {
       return <div className="skip-link" tabindex="0" aria-label="error loading google maps">Error loading Google Maps</div>
+    } else {
+      return <a href="#container" className="skip-link">Skip to Map</a>
     }
   }
 

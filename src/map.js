@@ -14,7 +14,7 @@ class Map extends React.Component {
     let mapcontainer = document.getElementById('container');
     if (buttonMap.innerText === 'Hide Map') {
       buttonMap.innerText = 'Show Map';
-      buttonMap.style.bottom = '0';
+      buttonMap.style.bottom = '2%';
       appcontainer.style.height = '100%';
       mapcontainer.style.top = '100%';
     } else {
