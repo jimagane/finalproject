@@ -15,3 +15,11 @@ export const getBusinessInfo = (locationId) =>
   fetch(`${corsAnywhere}/${api}/${locationId}`, {headers})
     .then(res => res.json())
     .then(data => data)
+
+export const loadYelpEmbedScript = () => {
+  let container = document.getElementById('yelpReview');
+  let scriptYelp = document.createElement('script');
+  scriptYelp.src= "https://www.yelp.com/embed/widgets.js";
+  scriptYelp.async= true;
+  container.appendChild(scriptYelp);
+}

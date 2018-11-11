@@ -7,9 +7,7 @@ class InfoWindowContent extends React.Component {
     button: 'See Reviews'
   }
 
-  componentDidUpdate() {
-    this.loadYelpEmbedScript();
-  }
+
 
   showReview = () => {
     const current = this.state.active;
@@ -31,6 +29,7 @@ class InfoWindowContent extends React.Component {
         <span className="yelp-review" data-review-id={id} data-hostname="www.yelp.com">...loading reviews</span>
         <span className="yelp-review" data-review-id={id2} data-hostname="www.yelp.com"></span>
         <span className="yelp-review" data-review-id={id3} data-hostname="www.yelp.com"></span>
+        {this.loadYelpEmbedScript()}
       </div>
     } else {
       // this.props.reloadReview(this.props.result.id);
@@ -41,8 +40,13 @@ class InfoWindowContent extends React.Component {
   loadYelpEmbedScript = () => {
     let container = document.getElementById('yelpReview');
     let scriptYelp = document.createElement('script');
+    let oldScript = document.getElementById('embed');
     scriptYelp.src= "https://www.yelp.com/embed/widgets.js";
     scriptYelp.async= true;
+    scriptYelp.id= "embed";
+    if (oldScript !== null) {
+      container.removeChild(oldScript);
+    }
     container.appendChild(scriptYelp);
   }
 
