@@ -4,8 +4,8 @@ import InfoWindowContent from './infowindowcontent';
 class List extends React.Component {
 
   linkToMap = () => {
-    if (this.props.map ===null) {
-      return <div className="skip-link" tabindex="0" aria-label="error loading google maps">Error loading Google Maps</div>
+    if (this.props.map === null) {
+      return <div className="skip-link" tabIndex="0" aria-label="error loading google maps">Error loading Google Maps</div>
     } else {
       return <a href="#container" className="skip-link">Skip to Map</a>
     }
@@ -35,7 +35,7 @@ class List extends React.Component {
 
         <main id="maincontent">
           <section id="list-container">
-            <h2 tabindex="0">Showing Results: {this.props.filteredResults.length} / {this.props.venues.length}</h2>
+            <h2 tabIndex="0">Showing Results: {this.props.filteredResults.length} / {this.props.venues.length}</h2>
             {this.linkToMap()}
             <ul role="tablist" id="venues-list">
               {this.props.filteredResults.map((result) => (

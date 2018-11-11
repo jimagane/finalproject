@@ -3,44 +3,11 @@ html, body, #root, #app {
   width: 100%;
 }
 
-#container {
-  position: fixed;
-  top: 0;
-  right: 0;
-  height: 100%;
-  width: 50%;
-}
-
-#map {
-  height: 100%;
-  width: 100%;
-  right: 0px;
-  bottom: 0px;
-  position: absolute;
-}
-
-.skip-link {
-  background-color: white;
-  position: absolute;
-  top: 2%;
-  left: 52%;
-  width: auto;
-  z-index: -1;
-}
-
-.skip-link:focus {
-  z-index: 100;
-}
-
 .options-box {
   background: violet;
   height: 100%;
   width: 50%;
   text-align: center;
-}
-
-#list-container {
-  background: violet;
 }
 
 h1 {
@@ -74,9 +41,33 @@ h2 {
   font-family: sans-serif;
 }
 
+#list-container {
+  background: violet;
+}
+
 #maincontent h2 {
   margin-top: 2%;
   font-size: 14px;
+}
+
+.skip-link {
+  background-color: white;
+  position: absolute;
+  top: 2%;
+  left: 52%;
+  width: auto;
+  z-index: -1;
+}
+
+.skip-link:focus {
+  z-index: 100;
+}
+
+#venues-list {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  padding-bottom: 2%;
 }
 
 .listitem {
@@ -88,18 +79,22 @@ h2 {
   background-color: white;
 }
 
-h3 {
-  color: black;
-  margin-bottom:1%;
-}
-
 a {
   text-decoration: none;
+}
+
+h3 {
+  color: black;
+  margin-bottom: 1%;
 }
 
 #maincontent h3:hover {
   color: purple;
   text-decoration: underline;
+}
+
+#maincontent h3:focus {
+  color: purple;
 }
 
 p {
@@ -124,35 +119,41 @@ p {
   display: block;
 }
 
-#venues-list {
-  margin: 0;
-  padding: 0;
+#container {
+  position: fixed;
+  top: 0;
+  right: 0;
   height: 100%;
-  padding-bottom: 2%;
-}
-
-.infocontent {
-  text-align: center;
+  width: 50%;
 }
 
 #mapButton {
   display: none;
 }
 
+#map {
+  height: 100%;
+  width: 100%;
+  right: 0px;
+  bottom: 0px;
+  position: absolute;
+}
+
+.infocontent {
+  text-align: center;
+}
+
 @media screen and (max-width: 650px) {
   #app {
     height: 70%;
-    overflow: scroll;
   }
 
   .options-box {
     width: 100%;
   }
 
-  #container {
-    width: 100%;
-    height: 30%;
-    top: 70%;
+  #list-container {
+    padding-bottom: 50%;
   }
 
   select {
@@ -165,10 +166,21 @@ p {
     left: 2%;
   }
 
+  .listitem {
+    padding: 1%;
+  }
+
   #reviewsButton {
     padding: 4%;
     color: red;
     font-weight: bold;
+  }
+
+  #container {
+    width: 100%;
+    height: 30%;
+    top: 70%;
+    background: white;
   }
 
   #mapButton {
@@ -183,25 +195,9 @@ p {
     padding-bottom: 2%;
     font-weight: bold;
   }
-
-  .hideMap {
-    display: none;
-  }
-
-  #maincontent h3:focus {
-    color: purple;
-  }
-
-  .listitem {
-    padding: 1%;
-  }
 }
 
 @media screen and (min-width: 651px) and (max-width: 950px) {
-  #container {
-    width: 50%;
-  }
-
   .options-box {
     width: 50%;
     height: 100%;
@@ -217,14 +213,18 @@ p {
     margin: 2%;
   }
 
+  #maincontent h3 {
+    text-decoration: underline;
+    color: purple;
+  }
+
   #reviewsButton {
     padding: 4%;
     color: red;
     font-weight: bold;
   }
 
-  #maincontent h3 {
-    text-decoration: underline;
-    color: purple;
+  #container {
+    width: 50%;
   }
 }

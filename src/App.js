@@ -141,7 +141,7 @@ class App extends Component {
   componentDidMount() {
     this.loadYelpAPI();
     window.initMap = this.initMap;
-    this.loadMapsAPI();
+    // this.loadMapsAPI();
   }
 
   loadYelpAPI = () => {

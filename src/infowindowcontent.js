@@ -33,8 +33,8 @@ class InfoWindowContent extends React.Component {
         <span className="yelp-review" data-review-id={id3} data-hostname="www.yelp.com"></span>
       </div>
     } else {
-      this.props.reloadReview(this.props.result.id);
-      return <div tabindex="0" aria-label="error, oops unable to load reviews">...oops! unable to load reviews</div>
+      // this.props.reloadReview(this.props.result.id);
+      return <div tabIndex="0" aria-label="error, oops unable to load reviews">...oops! unable to load reviews</div>
     }
   }
 
@@ -63,7 +63,7 @@ class InfoWindowContent extends React.Component {
         </div>
         <div id="yelpBox">
           <button id="reviewsButton" aria-label={labelName} onClick={this.showReview}>{this.state.button}</button>
-          <div id="yelpReview" aria-label="Yelp reviews" tabindex="0" className={this.state.active ? 'showReview' : 'hideReview'}>
+          <div id="yelpReview" aria-label="Yelp reviews" tabIndex="0" className={this.state.active ? 'showReview' : 'hideReview'}>
             {this.renderReviews()}
           </div>
         </div>
