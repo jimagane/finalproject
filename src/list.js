@@ -46,7 +46,6 @@ class List extends React.Component {
 
       }
     }
-    console.log(filteredReviews);
     return filteredReviews.map((result) => (
       <InfoWindowContent key={result.id} result={result} handleListClick={this.props.handleListClick} reloadReview={this.props.reloadReview} loadYelpEmbedScript={this.props.loadYelpEmbedScript} />
     ))

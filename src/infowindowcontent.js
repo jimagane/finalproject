@@ -47,7 +47,9 @@ class InfoWindowContent extends React.Component {
     if (oldScript !== null) {
       container.removeChild(oldScript);
     }
-    container.appendChild(scriptYelp);
+    if (container !== null) {
+      container.appendChild(scriptYelp);
+    }
   }
 
   render() {
