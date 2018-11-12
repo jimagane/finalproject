@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 import Map from './map';
 import List from './list';
-import * as YelpAPI from './YelpAPI';
 import scrollToComponent from 'react-scroll-to-component';
 
 class App extends Component {
@@ -139,53 +138,8 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // this.loadYelpAPI();
     window.initMap = this.initMap;
     this.loadMapsAPI();
-  }
-
-  loadYelpAPI = () => {
-    let stateCopy = Object.assign({}, this.state);
-    for (let i = 0; i < this.state.venues.length; i++) {
-      YelpAPI.getReviews(this.state.venues[i].id)
-      .then(data => {
-        // Code solution for updating single property of object in array via copying object and slicing, credit to Radosław Miernik, url: 'https://stackoverflow.com/questions/35174489/reactjs-setstate-of-object-key-in-array/35174579'
-
-        stateCopy.venues = stateCopy.venues.slice();
-        stateCopy.venues[i] = Object.assign({}, stateCopy.venues[i]);
-        stateCopy.venues[i].reviews = data;
-        if (i+1 === this.state.venues.length) {
-          this.setState(stateCopy);
-          this.setState({filteredResults: this.state.venues});
-        } else {
-          return(stateCopy);
-        }
-      });
-    }
-  }
-
-  loadYelpEmbedScript = () => {
-    let container = document.getElementById('list-item');
-    let scriptYelp = document.createElement('script');
-    scriptYelp.src= "https://www.yelp.com/embed/widgets.js";
-    scriptYelp.async= true;
-    container.appendChild(scriptYelp);
-  }
-
-  reloadReview = (id) => {
-    for (let i = 0; i < this.state.venues.length; i++) {
-      if (this.state.venues[i].id === id) {
-        YelpAPI.getReviews(this.state.venues[i].id)
-        .then(data => {
-          // Code solution for updating single property of object in array via copying object and slicing, credit to Radosław Miernik, url: 'https://stackoverflow.com/questions/35174489/reactjs-setstate-of-object-key-in-array/35174579'
-          let stateCopy = Object.assign({}, this.state);
-          stateCopy.venues = stateCopy.venues.slice();
-          stateCopy.venues[i] = Object.assign({}, stateCopy.venues[i]);
-          stateCopy.venues[i].reviews = data;
-          this.setState(stateCopy);
-        });
-      }
-    }
   }
 
   loadMapsAPI = () => {
@@ -212,7 +166,6 @@ class App extends Component {
     if (window.google !== undefined) {
       window.populateInfoWindow = this.populateInfoWindow;
       window.scrollToList = this.scrollToList;
-
       let markers = this.state.markers;
       let venues = this.state.filteredResults;
       for (const venue of venues) {
@@ -311,7 +264,7 @@ class App extends Component {
   render() {
     return (
       <div className="App" id="app">
-        <List venues={this.state.venues} filteredResults={this.state.filteredResults} selectRating={this.selectRating} selectPrice={this.selectPrice} ratingSelect={this.state.ratingSelect} priceSelect={this.state.priceSelect} handleListClick={this.handleListClick} reloadReview={this.reloadReview} map={this.state.map} loadYelpEmbedScript={this.loadYelpEmbedScript}/>
+        <List venues={this.state.venues} filteredResults={this.state.filteredResults} selectRating={this.selectRating} selectPrice={this.selectPrice} ratingSelect={this.state.ratingSelect} priceSelect={this.state.priceSelect} handleListClick={this.handleListClick} map={this.state.map} />
         <div id="container">
           <Map map={this.state.map} markers={this.state.markers} largeInfoWindow={this.state.largeInfoWindow} bounds={this.state.bounds} loadMarkers={this.loadMarkers} clearMarkers={this.clearMarkers} />
         </div>

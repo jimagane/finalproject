@@ -5,8 +5,7 @@ import * as YelpAPI from './YelpAPI';
 class List extends React.Component {
 
   state = {
-    reviews: this.props.venues,
-    filteredReviews: []
+    reviews: this.props.venues
   }
 
   componentDidMount() {
@@ -19,7 +18,6 @@ class List extends React.Component {
       YelpAPI.getReviews(this.state.reviews[i].id)
       .then(data => {
         // Code solution for updating single property of object in array via copying object and slicing, credit to Radosław Miernik, url: 'https://stackoverflow.com/questions/35174489/reactjs-setstate-of-object-key-in-array/35174579'
-
         stateCopy.reviews = stateCopy.reviews.slice();
         stateCopy.reviews[i] = Object.assign({}, stateCopy.reviews[i]);
         stateCopy.reviews[i].reviews = data;
@@ -40,14 +38,11 @@ class List extends React.Component {
       for (const result of filteredResults) {
         if (review.id === result.id) {
           filteredReviews.push(review);
-
         }
-
-
       }
     }
     return filteredReviews.map((result) => (
-      <InfoWindowContent key={result.id} result={result} handleListClick={this.props.handleListClick} reloadReview={this.props.reloadReview} loadYelpEmbedScript={this.props.loadYelpEmbedScript} />
+      <InfoWindowContent key={result.id} result={result} handleListClick={this.props.handleListClick} />
     ))
   }
 
@@ -87,7 +82,6 @@ class List extends React.Component {
             {this.linkToMap()}
             <ul role="tablist" id="venues-list">
               {this.renderList()}
-
             </ul>
           </section>
         </main>

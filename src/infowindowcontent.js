@@ -7,8 +7,6 @@ class InfoWindowContent extends React.Component {
     button: 'See Reviews'
   }
 
-
-
   showReview = () => {
     const current = this.state.active;
     let reviewsButton = this.state.button;
@@ -32,7 +30,6 @@ class InfoWindowContent extends React.Component {
         {this.loadYelpEmbedScript()}
       </div>
     } else {
-      // this.props.reloadReview(this.props.result.id);
       return <div tabIndex="0" aria-label="error, oops unable to load reviews">...oops! unable to load reviews</div>
     }
   }
