@@ -145,7 +145,7 @@ class App extends Component {
   loadMapsAPI = () => {
     let container = document.getElementById('app');
     let script = document.createElement('script');
-    script.src= "https://maps.googleapis.com/maps/api/js?key=AIzaSyBAhV7AdJGxUzx4KdpKX8Q6GDrYmV3V4yw&v=3&callback=initMap";
+    script.src= "https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLEMAPS_API_KEY_HERE&v=3&callback=initMap";
     script.async= true;
     script.defer= true;
     container.appendChild(script);

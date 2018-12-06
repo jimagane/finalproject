@@ -3,7 +3,7 @@ const api = 'https://api.yelp.com/v3/businesses'
 const corsAnywhere = 'https://cors-anywhere.herokuapp.com'
 
 const headers = {
-  'Authorization': 'Bearer AgpD7vz7EYdCYFwh8VohSI8wbacKNkT9Jh_ctE-RlgQhLP0B7CkPavgJbWajjAcbCWB9EAgis-OsuMDgRY6z1pyzXQ4QrrhRwkOkzEQYxWkZ2ZDAqXIzSr71QDHCW3Yx'
+  'Authorization': 'Bearer YOUR_YELP_AUTHORIZATION_KEY_HERE'
 }
 
 export const getReviews = (locationId) =>

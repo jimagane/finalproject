@@ -18,9 +18,13 @@ Use text editor to edit any CSS or JS files in src folder. The index.html file i
 
 1. Clone program files from repository to run or edit.
 
-2. Run `npm install`, `npm run build` and `serve -s build` to view app.
+2. In App.js file, line 148 replace `YOUR_GOOGLEMAPS_API_KEY_HERE` with your personal GoogleMaps API key to enable Google Maps API load.
 
-3. Use browser to visit local site: http://localhost:5000
+3. In YelpAPI.js file, line 6 replace `YOUR_YELP_AUTHORIZATION_KEY_HERE` with your personal Yelp Fusion access key to enable Yelp Reviews load.
+
+4. Run `npm install`, `npm run build` and `serve -s build` to view app.
+
+5. Use browser to visit local site: http://localhost:5000
 
 ## Running Tests
 
@@ -70,7 +74,7 @@ Yelp Reviews used as 3rd party API data as well as Yelp's iframe format widget:
 
 https://api.yelp.com/v3/businesses  https://www.yelp.com/embed/widgets.js
 
-Use of Herokuapp to assist with access of API data (would normally be accessed through use of own server):
+Use of Herokuapp to assist with access of API data (would normally be accessed through use of own server, but using Herokuapp for sake of demonstrating API use for Udacity class project):
 
 https://cors-anywhere.herokuapp.com
 
